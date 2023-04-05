@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "245808263508",
+    "project_id": "rngains-b9c68",
+    "storage_bucket": "rngains-b9c68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245808263508:android:04493adb422e601b3d18c1",
+        "android_client_info": {
+          "package_name": "com.TheKian.RNGains"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245808263508-ai7e0i2lshpr1qoq4mgamgsule6k5rf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB18cBmckCsg7lTE9Prq-wvrX1nwHUXNhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245808263508-ai7e0i2lshpr1qoq4mgamgsule6k5rf9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "245808263508-mu3qltl27hj1eqanl98fvv73ttnf0h8m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.TheKian.RNGains"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
