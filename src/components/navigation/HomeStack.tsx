@@ -10,9 +10,9 @@ import {
 import HomeScreen from "../../screens/HomeScreen";
 import { Colors } from "../../constants/colors";
 import FriendsScreen from "../../screens/FriendsScreen";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import ProfileScreen from "../../screens/ProfileScreen";
-import UpdateStatsScreen from "../../screens/UpdateStatsScreen";
+import UpdateStatsScreen from "../../screens/UpdateLiftsScreen";
 
 const Drawer = createDrawerNavigator();
 

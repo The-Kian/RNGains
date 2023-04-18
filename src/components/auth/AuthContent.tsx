@@ -1,17 +1,23 @@
-import { useNavigation, ParamListBase } from "@react-navigation/native";
 
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { Alert, StyleSheet, View } from "react-native";
-import { useState } from "react";
+import { Alert, View } from "react-native";
+import { useContext, useState } from "react";
 
-import { Colors } from "../../constants/colors";
-
+import { CredentialsType } from "./authTypes";
+import { AuthProps } from "./authTypes";
 import FlatButton from "../ui/FlatButton";
-import { AuthForm, credentialsType, authProps } from "./AuthForm";
+import AuthForm from "./AuthForm";
+import { buttonStyles, screenStyle } from "../../constants/styles";
+import { useNavigation } from "@react-navigation/native";
+import { authScreenProp } from "./authTypes";
+import { AuthContext } from "./AuthProvider";
 
-function AuthContent({ authScreenType, onSubmit }: authProps) {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+function AuthContent({ authScreenType, onSubmit }: AuthProps) {
+
+  const navigation = useNavigation<authScreenProp>()
+
+  const {user} = useContext(AuthContext);
 
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
@@ -22,13 +28,13 @@ function AuthContent({ authScreenType, onSubmit }: authProps) {
 
   function switchAuthModeHandler() {
   if (authScreenType == "login") {
-      navigation.replace("Signup");
+      navigation.replace("SignUp");
     } else if (authScreenType =="signUp") {
       navigation.replace("Login");
     }
   }
 
-  function submitHandler(credentials: credentialsType) {
+  function submitHandler(credentials: CredentialsType) {
     let { email, confirmEmail, password, confirmPassword, displayName } = credentials;
 
     email = email.trim();
@@ -57,13 +63,13 @@ function AuthContent({ authScreenType, onSubmit }: authProps) {
   }
 
   return (
-    <View style={styles.authContent}>
+    <View style={screenStyle.authContent}>
       <AuthForm
         onSubmit={submitHandler}
         credentialsInvalid={credentialsInvalid}
         authScreenType={authScreenType}
       />
-      <View style={styles.buttons}>
+      <View>
         {authScreenType !== "update" &&(
           <FlatButton onPress={switchAuthModeHandler}>
             {authScreenType === "login" ? "Create a new user" : "Login instead"}
@@ -76,20 +82,4 @@ function AuthContent({ authScreenType, onSubmit }: authProps) {
 
 export default AuthContent;
 
-const styles = StyleSheet.create({
-  authContent: {
-    marginTop: 64,
-    marginHorizontal: 32,
-    padding: 16,
-    borderRadius: 8,
-    backgroundColor: Colors.primaryDark,
-    elevation: 2,
-    shadowColor: "black",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.35,
-    shadowRadius: 4,
-  },
-  buttons: {
-    marginTop: 8,
-  },
-});
+

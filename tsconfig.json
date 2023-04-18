@@ -3,7 +3,8 @@
 
   "compilerOptions": {
     "jsx": "react-jsx",
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "baseUrl": "./src/js"
   },
   "allowSyntheticDefaultImports": true,
   "esModuleInterop": true

@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 
 import AuthContent from "../components/auth/AuthContent";
-import { credentialsType } from "../components/auth/AuthForm";
+import { CredentialsType } from "../components/auth/authTypes"
 import LoadingOverlay from "../components/ui/LoadingOverlay";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../components/auth/AuthProvider";
 
 function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -21,7 +21,7 @@ function SignupScreen() {
 
   return (
     <AuthContent
-      onSubmit={(credentials: credentialsType) => {
+      onSubmit={(credentials: CredentialsType) => {
         signupHandler(credentials.email, credentials.password);
       }}
       credentialsInvalid={{

@@ -1,41 +1,29 @@
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { AuthProps } from "./authTypes";
 
+import { View } from "react-native";
 import Button from "../ui/Button";
-import Input from "./Input";
+import Input from "../ui/Input";
+import { buttonStyles } from "../../constants/styles";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 
-type credentialsInvalidType = {
-  email: boolean;
-  confirmEmail: boolean;
-  password: boolean;
-  confirmPassword: boolean;
-};
 
-export type credentialsType = {
-  email: string;
-  confirmEmail: string;
-  password: string;
-  confirmPassword: string;
-  displayName: string;
-};
 
-export type authProps = {
-  authScreenType: "login" | "signUp" | "update";
-  onSubmit: (credentials: credentialsType) => void;
-  credentialsInvalid: credentialsInvalidType;
-};
+const AuthForm = ({
+  authScreenType, onSubmit, credentialsInvalid}: AuthProps) => 
+  
+ {
+  const {user} = useContext(AuthContext);
 
-export const AuthForm: React.FC<authProps> = ({
-  authScreenType, onSubmit, credentialsInvalid }) =>
-  {
-  const [enteredEmail, setEnteredEmail] = useState("test@test.com");
+  const [enteredEmail, setEnteredEmail] = useState(user?.email ?? "test@test.com");
   const [enteredConfirmEmail, setEnteredConfirmEmail] =
     useState("test@test.com");
   const [enteredPassword, setEnteredPassword] = useState("password");
   const [enteredConfirmPassword, setEnteredConfirmPassword] =
     useState("password");
 
-  const [enteredDisplayName, setEnteredDisplayName] = useState("Test");
+  const [enteredDisplayName, setEnteredDisplayName] = useState(user?.displayName??"");
 
   const {
     email: emailIsInvalid,
@@ -75,15 +63,9 @@ export const AuthForm: React.FC<authProps> = ({
   }
 
   return (
-    <View
-      style={
-        {
-          /*styles.form*/
-        }
-      }
-    >
+    <View>
       <View>
-      {authScreenType !== "update" && ( 
+      {authScreenType !== "update" &&( 
         <Input
           label="Email Address"
           onUpdateValue={updateInputValueHandler.bind(this, "email")}
@@ -101,7 +83,7 @@ export const AuthForm: React.FC<authProps> = ({
             isInvalid={emailsDontMatch}
           />
         )}
-      {authScreenType == "update" && (      
+      {authScreenType !== "login" && (      
         <Input
           label="Display Name"
           onUpdateValue={updateInputValueHandler.bind(this, "displayName")}
@@ -109,6 +91,7 @@ export const AuthForm: React.FC<authProps> = ({
           isInvalid={false}
         />
         )}
+        {authScreenType !== "update" &&
       <Input
             label="Password"
             onUpdateValue={updateInputValueHandler.bind(this, "password")}
@@ -116,6 +99,7 @@ export const AuthForm: React.FC<authProps> = ({
             value={enteredPassword}
             isInvalid={passwordIsInvalid}
           />
+        }
         {authScreenType == "signUp" && (
           <Input
             label="Confirm Password"
@@ -128,7 +112,7 @@ export const AuthForm: React.FC<authProps> = ({
             isInvalid={passwordsDontMatch}
           />
         )}
-        <View style={styles.buttons}>
+        <View style={buttonStyles.buttons}>
           <Button onPress={submitHandler}>
             {authScreenType === "login"
               ? "Log In"
@@ -142,9 +126,4 @@ export const AuthForm: React.FC<authProps> = ({
   );
 }
 
-
-const styles = StyleSheet.create({
-  buttons: {
-    marginTop: 12,
-  },
-});
+export default AuthForm

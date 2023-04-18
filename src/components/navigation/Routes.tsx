@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import auth from "@react-native-firebase/auth";
 
 import HomeStack from "./HomeStack";
