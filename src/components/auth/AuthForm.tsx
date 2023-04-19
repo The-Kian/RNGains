@@ -16,9 +16,9 @@ const AuthForm = ({
  {
   const {user} = useContext(AuthContext);
 
-  const [enteredEmail, setEnteredEmail] = useState(user?.email ?? "test@test.com");
+  const [enteredEmail, setEnteredEmail] = useState(user?.email ?? "test@gmail.com");
   const [enteredConfirmEmail, setEnteredConfirmEmail] =
-    useState("test@test.com");
+    useState("test@gmail.com");
   const [enteredPassword, setEnteredPassword] = useState("password");
   const [enteredConfirmPassword, setEnteredConfirmPassword] =
     useState("password");

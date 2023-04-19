@@ -7,11 +7,13 @@ import { AuthContext } from "../components/auth/AuthProvider";
 
 function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const { register } = useContext(AuthContext);
+  const { register, update } = useContext(AuthContext);
 
-  async function signupHandler(email: string, password: string) {
+  async function signupHandler(email: string, password: string, displayName: string) {
     setIsAuthenticating(true);
     await register({ email, password });
+    await update({displayName})
+    //await update({displayName ?? email})
     setIsAuthenticating(false);
   }
 
@@ -22,7 +24,7 @@ function SignupScreen() {
   return (
     <AuthContent
       onSubmit={(credentials: CredentialsType) => {
-        signupHandler(credentials.email, credentials.password);
+        signupHandler(credentials.email, credentials.password, credentials.displayName);
       }}
       credentialsInvalid={{
         email: false,

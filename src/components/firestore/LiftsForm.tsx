@@ -28,7 +28,6 @@ export const LiftsForm: React.FC<LiftsFormProps> = ({}) => {
     const {uploadStats} = useContext(UserStatsContext)
 
     function updateInputValueHandler(inputType: string, enteredValue: string) {
-      const enteredNumber = parseInt(enteredValue)
     switch (inputType) {
       case "weight":
         setUserWeight(enteredValue);
@@ -47,10 +46,10 @@ export const LiftsForm: React.FC<LiftsFormProps> = ({}) => {
     function submitHandler() {
       uploadStats({
         userID: user.uid,
-        userWeight: parseInt(enteredUserWeight),
-        benchWeight: parseInt(enteredBenchWeight),
-        deadliftWeight: parseInt(enteredDeadliftWeight),
-        squatWeight: parseInt(enteredSquatWeight),
+        userWeight: parseFloat(enteredUserWeight),
+        benchWeight: parseFloat(enteredBenchWeight),
+        deadliftWeight: parseFloat(enteredDeadliftWeight),
+        squatWeight: parseFloat(enteredSquatWeight),
       });
     }
   

@@ -8,10 +8,6 @@ import { AuthContextType, defaultAuthContext } from "./AuthTypes";
 
 export const AuthContext = createContext(defaultAuthContext);
 
-
-
-
-
 export function AuthProvider({ children }: ProviderProps) {
 	const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 	
