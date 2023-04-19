@@ -1,30 +1,31 @@
 
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { useContext } from "react";
 import { Text, View } from "react-native";
-import { LiftsForm, liftStatsType } from "../components/ui/LiftsForm";
+import { AuthContext } from "../components/auth/AuthProvider";
+import { AuthContextType } from "../components/auth/AuthTypes";
+import { LiftsForm, liftStatsType } from "../components/firestore/LiftsForm";
+import { UserStatsContext, UserStatsProvider } from "../components/firestore/UserStatsProvider";
 import { screenStyle } from "../constants/styles";
 
-//const {uploadStats} = useContext(UserStatsContext)
-//const { user } = useContext(AuthContext);
-
 export default function UpdateLiftsScreen() {
-  // async function submitStatsHandler(weight: number, bench: number, deadlift: number, squat: number) {
-  //   await uploadStats({ user,weight, bench, deadlift, squat });
-  // }
+
+  const { uploadStats } = useContext(UserStatsContext)
+  console.log(`uploadStats from context`, uploadStats)
+  const {user} = useContext(AuthContext)
+
+  async function submitStatsHandler(userID: string, userWeight: number, benchWeight: number, deadliftWeight: number, squatWeight: number) {
+    console.log('before uploadStats')
+    await uploadStats({userID, userWeight, squatWeight, benchWeight, deadliftWeight})
+    console.log('after uploadStats')
+  }
 
   return (
+    <UserStatsProvider>
     <View style={screenStyle.rootContainer}>
       <Text style={screenStyle.title}>New PR?</Text>
-      {/* <LiftsForm
-        onSubmit={(liftStats: liftStatsType) => {
-          console.log("onSubmit");
-          submitStatsHandler(
-            liftStats.userWeight,
-            liftStats.benchWeight,
-            liftStats.deadliftWeight,
-            liftStats.squatWeight
-          );
-        }}
-      ></LiftsForm> */}
+      <LiftsForm></LiftsForm>
     </View>
+    </UserStatsProvider>
   );
 }

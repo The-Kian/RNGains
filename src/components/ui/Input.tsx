@@ -6,7 +6,7 @@ function Input(props: {
   keyboardType?: KeyboardTypeOptions,
   onUpdateValue: ((enteredValue: any) => void),
   secure?: boolean,
-  value: any,
+  value: string,
   isInvalid: boolean,
 }) {
   return (

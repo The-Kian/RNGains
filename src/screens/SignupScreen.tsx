@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 
 import AuthContent from "../components/auth/AuthContent";
-import { CredentialsType } from "../components/auth/authTypes"
+import { CredentialsType } from "../components/auth/AuthTypes"
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { AuthContext } from "../components/auth/AuthProvider";
 

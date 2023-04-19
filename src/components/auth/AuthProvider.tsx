@@ -1,22 +1,20 @@
 import React, { useState, ReactNode, createContext, useEffect } from "react";
 import { Alert } from "react-native";
 import auth, {FirebaseAuthTypes} from "@react-native-firebase/auth";
-import { AuthContextType, defaultAuthContext } from "./authTypes";
+import { ProviderProps } from "../../constants/genericTypes";
+import { AuthContextType, defaultAuthContext } from "./AuthTypes";
 
 
 
 export const AuthContext = createContext(defaultAuthContext);
 
-export type ProviderProps = {
-	children?: ReactNode;
-};
+
 
 
 
 export function AuthProvider({ children }: ProviderProps) {
 	const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-
-
+	
 
   useEffect(() => {
     auth().onAuthStateChanged(userState => {

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { CredentialsType } from "../components/auth/authTypes";
+import { CredentialsType } from "../components/auth/AuthTypes";
 import AuthContent from "../components/auth/AuthContent";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { AuthContext } from "../components/auth/AuthProvider";

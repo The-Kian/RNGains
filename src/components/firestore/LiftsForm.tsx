@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
-import Input from "./Input";
+import React, { useContext, useState } from "react";
+import Input from "../ui/Input";
 import { Colors } from "../../constants/colors";
-import Button from "./Button";
+import Button from "../ui/Button";
+import { AuthContext } from "../auth/AuthProvider";
+import { UserStatsContext } from "./UserStatsProvider";
 
 
 export type liftStatsType = {
@@ -13,16 +15,20 @@ export type liftStatsType = {
 }
 
 export type LiftsFormProps = {
-  onSubmit: (liftStats: liftStatsType) => void
+  //onSubmit: (liftStats: liftStatsType) => void
 };
 
-export const LiftsForm: React.FC<LiftsFormProps> = ({onSubmit}) => {
-    const [enteredUserWeight, setUserWeight] = useState<number>(0);
-    const [enteredBenchWeight, setBenchWeight] = useState<number>(0);
-    const [enteredDeadliftWeight, setDeadliftWeight] = useState<number>(0);
-    const [enteredSquatWeight, setSquatWeight] = useState<number>(0);
+export const LiftsForm: React.FC<LiftsFormProps> = ({}) => {
+    const [enteredUserWeight, setUserWeight] = useState<string>('');
+    const [enteredBenchWeight, setBenchWeight] = useState<string>('');
+    const [enteredDeadliftWeight, setDeadliftWeight] = useState<string>('');
+    const [enteredSquatWeight, setSquatWeight] = useState<string>('');
 
-    function updateInputValueHandler(inputType: string, enteredValue: number) {
+    const {user} = useContext(AuthContext)
+    const {uploadStats} = useContext(UserStatsContext)
+
+    function updateInputValueHandler(inputType: string, enteredValue: string) {
+      const enteredNumber = parseInt(enteredValue)
     switch (inputType) {
       case "weight":
         setUserWeight(enteredValue);
@@ -38,15 +44,16 @@ export const LiftsForm: React.FC<LiftsFormProps> = ({onSubmit}) => {
         break;
     }
   }
-
-  function submitHandler() {
-    onSubmit({
-      userWeight: enteredUserWeight,
-      benchWeight: enteredBenchWeight,
-      deadliftWeight: enteredDeadliftWeight,
-      squatWeight: enteredSquatWeight,
-    });
-  }
+    function submitHandler() {
+      uploadStats({
+        userID: user.uid,
+        userWeight: parseInt(enteredUserWeight),
+        benchWeight: parseInt(enteredBenchWeight),
+        deadliftWeight: parseInt(enteredDeadliftWeight),
+        squatWeight: parseInt(enteredSquatWeight),
+      });
+    }
+  
 
   return (
     <View style={styles.updateLiftsContent}>

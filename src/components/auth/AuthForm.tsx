@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AuthProps } from "./authTypes";
+import { AuthProps } from "./AuthTypes";
 
 import { View } from "react-native";
 import Button from "../ui/Button";
