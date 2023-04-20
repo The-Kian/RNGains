@@ -24,6 +24,7 @@ const AuthForm = ({
     useState("password");
 
   const [enteredDisplayName, setEnteredDisplayName] = useState(user?.displayName??"");
+  const [enteredDateofBirth, setEnteredDateOfBirth] = useState(user?.displayName??"12/12/1997");
 
   const {
     email: emailIsInvalid,
@@ -49,6 +50,9 @@ const AuthForm = ({
       case "displayName":
         setEnteredDisplayName(enteredValue);
         break;
+      case 'dateOfBirth':
+        setEnteredDateOfBirth(enteredValue)
+        break
     }
   }
 

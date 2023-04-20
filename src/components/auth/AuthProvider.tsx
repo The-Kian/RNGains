@@ -1,8 +1,9 @@
-import React, { useState, ReactNode, createContext, useEffect } from "react";
+import React, { useState, ReactNode, createContext, useEffect, useContext } from "react";
 import { Alert } from "react-native";
 import auth, {FirebaseAuthTypes} from "@react-native-firebase/auth";
 import { ProviderProps } from "../../constants/genericTypes";
 import { AuthContextType, defaultAuthContext } from "./AuthTypes";
+import { UserStatsContext } from "../firestore/UserStatsProvider";
 
 
 
@@ -10,7 +11,7 @@ export const AuthContext = createContext(defaultAuthContext);
 
 export function AuthProvider({ children }: ProviderProps) {
 	const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-	
+
 
   useEffect(() => {
     auth().onAuthStateChanged(userState => {
@@ -18,6 +19,9 @@ export function AuthProvider({ children }: ProviderProps) {
     })
   },[])
 
+
+
+  
 
 	const login = async ({
 		email,

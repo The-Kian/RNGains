@@ -6,6 +6,7 @@ import HomeStack from "./HomeStack";
 import LoadingOverlay from "../ui/LoadingOverlay";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
+import { UserStatsProvider } from "../firestore/UserStatsProvider";
 
 export default function Routes() {
   const { user, setUser, login, register, logout } = useContext(AuthContext);
@@ -26,6 +27,10 @@ export default function Routes() {
   if (initializing) return <LoadingOverlay message="Loading"></LoadingOverlay>;
 
   return <NavigationContainer>
-    {user ? <HomeStack/> :<AuthStack/>}
+    {user ? 
+    <UserStatsProvider>
+      <HomeStack/>
+    </UserStatsProvider>   :<AuthStack/>}
+      
   </NavigationContainer>;
 }

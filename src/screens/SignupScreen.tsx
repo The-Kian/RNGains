@@ -13,7 +13,6 @@ function SignupScreen() {
     setIsAuthenticating(true);
     await register({ email, password });
     await update({displayName})
-    //await update({displayName ?? email})
     setIsAuthenticating(false);
   }
 

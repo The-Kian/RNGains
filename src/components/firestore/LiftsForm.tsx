@@ -1,32 +1,33 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Input from "../ui/Input";
 import { Colors } from "../../constants/colors";
 import Button from "../ui/Button";
 import { AuthContext } from "../auth/AuthProvider";
-import { UserStatsContext } from "./UserStatsProvider";
+import { UserStatsContext, UserStatsProvider } from "./UserStatsProvider";
+import { LiftsFormProps, liftStatsType } from "./UserStatsTypes";
 
 
-export type liftStatsType = {
-  userWeight: number
-  squatWeight: number,
-  deadliftWeight: number,
-  benchWeight: number
-}
+export const LiftsForm = () => {
 
-export type LiftsFormProps = {
-  //onSubmit: (liftStats: liftStatsType) => void
-};
+  const {user} = useContext(AuthContext)
+  const {uploadStats, latestLift, fetchLatestLift} = useContext(UserStatsContext)
 
-export const LiftsForm: React.FC<LiftsFormProps> = ({}) => {
     const [enteredUserWeight, setUserWeight] = useState<string>('');
     const [enteredBenchWeight, setBenchWeight] = useState<string>('');
     const [enteredDeadliftWeight, setDeadliftWeight] = useState<string>('');
     const [enteredSquatWeight, setSquatWeight] = useState<string>('');
 
-    const {user} = useContext(AuthContext)
-    const {uploadStats} = useContext(UserStatsContext)
+    useEffect(() => {
+      if (latestLift) {
+        setUserWeight(latestLift.userWeight.toString())
+        setBenchWeight(latestLift.benchWeight.toString())
+        setDeadliftWeight(latestLift.deadliftWeight.toString())
+        setSquatWeight(latestLift.squatWeight.toString())
+      }
+    }, [latestLift])
 
+   
     function updateInputValueHandler(inputType: string, enteredValue: string) {
     switch (inputType) {
       case "weight":
@@ -87,7 +88,7 @@ export const LiftsForm: React.FC<LiftsFormProps> = ({}) => {
       <Button onPress={submitHandler}>Submit</Button>
            </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   updateLiftsContent: {

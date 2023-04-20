@@ -17,8 +17,6 @@ function AuthContent({ authScreenType, onSubmit }: AuthProps) {
 
   const navigation = useNavigation<authScreenProp>()
 
-  const {user} = useContext(AuthContext);
-
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,

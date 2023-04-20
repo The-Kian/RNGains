@@ -1,15 +1,33 @@
 import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
+
+export interface Lift {
+	id: string,
+	userWeight: number;
+	squatWeight: number;
+	deadliftWeight: number;
+	benchWeight: number;
+	timestamp: FirebaseFirestoreTypes.Timestamp
+  }
+
+  export type liftStatsType = {
+	userID: string,
+	userWeight: number
+	squatWeight: number,
+	deadliftWeight: number,
+	benchWeight: number,
+  }
+  
+  export type LiftsFormProps = {};
 
 export interface UserStatsContextType {
-	uploadStats: (props: {
-		userID: string;
-		userWeight: number;
-		squatWeight: number;
-		benchWeight: number;
-		deadliftWeight: number;
-	}) => Promise<void>;
+	uploadStats: (stats: liftStatsType) => Promise<void>;
+	latestLift: Lift | null
+	fetchLatestLift: (userID: string) => void
 }
 
 export const defaultUserStatsContext: UserStatsContextType = {
 	uploadStats: async () => {},
+	latestLift: null,
+	fetchLatestLift: async () => {},
 };
