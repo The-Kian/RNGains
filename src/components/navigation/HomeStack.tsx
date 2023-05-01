@@ -13,6 +13,7 @@ import FriendsScreen from "../../screens/FriendsScreen";
 import { AuthContext } from "../auth/AuthProvider";
 import ProfileScreen from "../../screens/ProfileScreen";
 import UpdateStatsScreen from "../../screens/UpdateLiftsScreen";
+import LiftHistoryScreen from "../../screens/LiftHistoryScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -42,6 +43,7 @@ export default function HomeStack() {
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Friends" component={FriendsScreen} />
       <Drawer.Screen name="UpdateStats" component={UpdateStatsScreen} />
+      <Drawer.Screen name="Stats History" component={LiftHistoryScreen} />
     </Drawer.Navigator>
   );
 }

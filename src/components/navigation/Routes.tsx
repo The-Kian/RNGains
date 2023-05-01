@@ -3,7 +3,7 @@ import { AuthContext } from "../auth/AuthProvider";
 import auth from "@react-native-firebase/auth";
 
 import HomeStack from "./HomeStack";
-import LoadingOverlay from "../ui/LoadingOverlay";
+import LoadingOverlay from "../../screens/LoadingOverlay";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
 import { UserStatsProvider } from "../firestore/UserStatsProvider";

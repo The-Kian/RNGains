@@ -24,10 +24,14 @@ export interface UserStatsContextType {
 	uploadStats: (stats: liftStatsType) => Promise<void>;
 	latestLift: Lift | null
 	fetchLatestLift: (userID: string) => void
+	fetchAllLifts: (userID: string) => void
+	allLifts: Lift[] | null
 }
 
 export const defaultUserStatsContext: UserStatsContextType = {
 	uploadStats: async () => {},
 	latestLift: null,
 	fetchLatestLift: async () => {},
+	fetchAllLifts:async () => {},
+	allLifts: null
 };

@@ -5,7 +5,7 @@ import { AuthContext } from "../components/auth/AuthProvider";
 import { CredentialsType } from "../components/auth/AuthTypes";
 import AuthContent from "../components/auth/AuthContent";
 import { screenStyle } from "../constants/styles";
-import LoadingOverlay from "../components/ui/LoadingOverlay";
+import LoadingOverlay from "./LoadingOverlay";
 
 export default function ProfileScreen() {
 	const [isAuthenticating, setIsAuthenticating] = useState(false);

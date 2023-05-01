@@ -33,6 +33,19 @@ export const screenStyle = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 4,
   },
+  liftContent: {
+    marginTop: 16,
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: Colors.primaryLight,
+    elevation: 4,
+    shadowColor: "black",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 8,
+    flex: 1,
+    flexDirection: 'column' 
+  },
 
 
 });

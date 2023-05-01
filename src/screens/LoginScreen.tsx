@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { CredentialsType } from "../components/auth/AuthTypes";
 import AuthContent from "../components/auth/AuthContent";
-import LoadingOverlay from "../components/ui/LoadingOverlay";
+import LoadingOverlay from "./LoadingOverlay";
 import { AuthContext } from "../components/auth/AuthProvider";
 
 function LoginScreen() {
