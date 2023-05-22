@@ -2,7 +2,7 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "./colors";
 
-export const screenStyle = StyleSheet.create({
+export const ScreenStyle = StyleSheet.create({
   default: {
     backgroundColor: Colors.primaryMedium,
   },

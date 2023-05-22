@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../../constants/colors';
-import { buttonStyles, screenStyle } from '../../constants/styles';
+import { buttonStyles, ScreenStyle } from '../../constants/styles';
 
 function Button(props:{ children: ReactNode, onPress: () => void }) {
   return (
