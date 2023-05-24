@@ -2,44 +2,62 @@ import { Dimensions, Text, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { ScreenStyle } from "../../../constants/styles";
 import { Lift } from "../../firestore/UserStatsTypes";
+import { useEffect, useState } from "react";
+import LoadingOverlay from "../../../screens/LoadingOverlay";
 
 export interface GraphProps {
 	lifts: Lift[];
+	chartType: string
 }
 
-export const SquatChart = ({ lifts }: GraphProps) => {
-	const squatData = lifts.map((lift) => lift.squatWeight);
+export const LiftChart = ({ lifts, chartType }: GraphProps) => {
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		if (lifts.length >0) {
+			setLoading(false)
+		}
+	}, [lifts])
+
+	if (loading) {
+		return <LoadingOverlay message="Fetching lifts"/>
+	}
+
+	const liftWeightKey = `${chartType}Weight` as keyof Lift
+	const liftData = lifts.map((lift) => lift[liftWeightKey] as number);
+
 	const labels = lifts.map((lift) => {
 		const date = lift.timestamp.toDate(); // Converts Firestore Timestamp to JavaScript Date
-		return date.toLocaleDateString();
+		const dateString = `${date.getDate()}/${date.getMonth()}`
+		return dateString
 	  });
-  
 
 	const line = {
-		labels: [],
+		labels: labels,
 		datasets: [
 			{
-				data: squatData,
+				data: liftData,
 				strokeWidth: 2,
 			},
 		],
 	};
 
 	return (
+		
 		<View style={ScreenStyle.rootContainer}>
-			<Text> Graph </Text>
+			<Text> {chartType} </Text>
 			<LineChart
 				data={line}
 				width={Dimensions.get("window").width} // from react-native
 				height={220}
-				yAxisLabel="$"
-				yAxisSuffix="k"
+				yAxisLabel=""
+				yAxisSuffix="kg"
 				yAxisInterval={1} // optional, defaults to 1
 				chartConfig={{
 					backgroundColor: "#e26a00",
 					backgroundGradientFrom: "#fb8c00",
 					backgroundGradientTo: "#ffa726",
-					decimalPlaces: 2, // optional, defaults to 2dp
+					decimalPlaces: 1, // optional, defaults to 2dp
 					color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
 					labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
 					style: {

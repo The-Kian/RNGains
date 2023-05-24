@@ -1,17 +1,17 @@
-import { View, Text, StyleSheet } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet } from "react-native";
+import  { useContext, useEffect, useState } from "react";
 import Input from "../ui/Input";
 import { Colors } from "../../constants/colors";
 import Button from "../ui/Button";
 import { AuthContext } from "../auth/AuthProvider";
-import { UserStatsContext, UserStatsProvider } from "./UserStatsProvider";
-import { LiftsFormProps, liftStatsType } from "./UserStatsTypes";
+import { UserStatsContext } from "./UserStatsProvider";
+import { ScreenStyle } from "../../constants/styles";
 
 
 export const LiftsForm = () => {
 
   const {user} = useContext(AuthContext)
-  const {uploadStats, latestLift, fetchLatestLift} = useContext(UserStatsContext)
+  const {uploadStats, latestLift} = useContext(UserStatsContext)
 
     const [enteredUserWeight, setUserWeight] = useState<string>('');
     const [enteredBenchWeight, setBenchWeight] = useState<string>('');
@@ -56,7 +56,7 @@ export const LiftsForm = () => {
   
 
   return (
-    <View style={styles.updateLiftsContent}>
+    <View style={ScreenStyle.updateLiftsContent}>
       <Input 
         label="Weight (kg)"
         keyboardType="number-pad"
@@ -90,19 +90,3 @@ export const LiftsForm = () => {
   );
 }
 
-const styles = StyleSheet.create({
-  updateLiftsContent: {
-    marginHorizontal: 2,
-    padding: 64,
-    borderRadius: 8,
-    elevation: 2,
-    shadowColor: "black",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.35,
-    shadowRadius: 4,
-    backgroundColor: Colors.primaryDark
-  },
-  buttons: {
-    marginTop: 8,
-  },
-});

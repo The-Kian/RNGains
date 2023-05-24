@@ -13,6 +13,10 @@ export const ScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  loadingMessage: {
+    fontSize: 16,
+    marginBottom: 12,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -20,6 +24,17 @@ export const ScreenStyle = StyleSheet.create({
   },
   welcomeText: {
     padding: 6,
+  },
+  updateLiftsContent: {
+    marginHorizontal: 2,
+    padding: 64,
+    borderRadius: 8,
+    elevation: 2,
+    shadowColor: "black",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.35,
+    shadowRadius: 4,
+    backgroundColor: Colors.primaryDark
   },
   authContent: {
     marginTop: 64,
@@ -104,4 +119,6 @@ export const inputStyles = StyleSheet.create({
   inputInvalid: {
     backgroundColor: Colors.error100,
   },
+
 });
+

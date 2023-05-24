@@ -1,16 +1,15 @@
 
 
 import { Alert, View } from "react-native";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import { CredentialsType } from "./AuthTypes";
 import { AuthProps } from "./AuthTypes";
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
-import { buttonStyles, ScreenStyle } from "../../constants/styles";
+import {ScreenStyle } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { authScreenProp } from "./AuthTypes";
-import { AuthContext } from "./AuthProvider";
 
 
 function AuthContent({ authScreenType, onSubmit }: AuthProps) {
@@ -33,7 +32,7 @@ function AuthContent({ authScreenType, onSubmit }: AuthProps) {
   }
 
   function submitHandler(credentials: CredentialsType) {
-    let { email, confirmEmail, password, confirmPassword, displayName } = credentials;
+    let { email, confirmEmail, password, confirmPassword } = credentials;
 
     email = email.trim();
     password = password.trim();

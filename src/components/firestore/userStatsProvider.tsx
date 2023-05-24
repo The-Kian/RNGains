@@ -6,7 +6,6 @@ import { AuthContext } from "../auth/AuthProvider";
 import {
 	defaultUserStatsContext,
 	Lift,
-	UserStatsContextType,
 } from "./UserStatsTypes";
 
 export const UserStatsContext = createContext(defaultUserStatsContext);
@@ -98,6 +97,7 @@ export function UserStatsProvider({ children }: ProviderProps) {
 			setLoading(false)
 		} else {
 		}
+
 	};
 
 	return (

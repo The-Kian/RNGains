@@ -1,9 +1,10 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ScreenStyle } from '../constants/styles';
 
 function LoadingOverlay(props: { message: string }) {
   return (
-    <View style={styles.rootContainer}>
-      <Text style={styles.message}>{props.message}</Text>
+    <View style={ScreenStyle.rootContainer}>
+      <Text style={ScreenStyle.loadingMessage}>{props.message}</Text>
       <ActivityIndicator size="large" />
     </View>
   );
@@ -11,15 +12,4 @@ function LoadingOverlay(props: { message: string }) {
 
 export default LoadingOverlay;
 
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 32,
-  },
-  message: {
-    fontSize: 16,
-    marginBottom: 12,
-  },
-});
+

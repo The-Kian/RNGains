@@ -1,17 +1,15 @@
-import { useState } from "react";
-import { FlatList, ListRenderItem} from "react-native";
-import {  View } from "react-native";
+import { FlatList } from "react-native";
 import { Lift } from "../firestore/UserStatsTypes";
-import { ScreenStyle } from "../../constants/styles";
-import { GraphProps, SquatChart } from "./LiftHistory/SquatChart";
+
+import { LiftChart } from "./LiftHistory/LiftChart";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface CarouselProps {
-	liftsData: Lift[]
-
+	liftsData: Lift[];
+	children: (lifts: Lift[]) => JSX.Element;
 }
 
-export const Carousel = ({liftsData} : CarouselProps) => {
-
+export const Carousel = ({ liftsData, children }: CarouselProps) => {
 	return (
 			<FlatList
 				horizontal={true}
@@ -19,11 +17,17 @@ export const Carousel = ({liftsData} : CarouselProps) => {
 				scrollEventThrottle={200}
 				pagingEnabled
 				decelerationRate="fast"
-                data={liftsData}
-				renderItem={({ item }) => <SquatChart lifts={[item]} />}
+	            data={[liftsData]}
+				renderItem = {({ item }) => children(item)}
 				keyExtractor={(item, index) => index.toString()}
 			/>
 	);
-}
+
+	// return (
+	// 	<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+	// 		{children(liftsData)}
+	// 	</ScrollView>
+	// );
+};
 
 export default Carousel;

@@ -3,9 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import { AuthContext } from "../../components/auth/AuthProvider";
 
 import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
-import { Lift } from "../../components/firestore/UserStatsTypes";
-import Button from "../../components/ui/Button";
-import Carousel from "../../components/ui/Carousel";
+
 import { liftHistoryList } from "../../components/ui/LiftHistory/LiftHistoryList";
 import { ScreenStyle } from "../../constants/styles";
 
