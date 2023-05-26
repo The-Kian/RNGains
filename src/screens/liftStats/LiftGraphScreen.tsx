@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { AuthContext } from "../../components/auth/AuthProvider";
 
 import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
-import Carousel from "../../components/ui/Carousel";
+import LiftCarousel from "../../components/ui/LiftCarousel";
 
 import { ScreenStyle } from "../../constants/styles";
 import { LiftChart } from "../../components/ui/LiftHistory/LiftChart";
@@ -21,14 +21,15 @@ function LiftGraphScreen() {
 		<View style={ScreenStyle.rootContainer}>
 			<Text style={ScreenStyle.title}>grphs!</Text>
 			<Text style={ScreenStyle.welcomeText}> </Text>
-			<Carousel liftsData={allLifts || []}>
+			<LiftCarousel liftsData={allLifts || []}>
 				{(lifts) => (
 					<>
 						<LiftChart lifts={lifts} chartType="squat"/>
 						<LiftChart lifts={lifts} chartType="deadlift"/>
+						<LiftChart lifts={lifts} chartType="bench" />
 					</>
 				)}
-			</Carousel>
+			</LiftCarousel>
 		</View>
 	);
 }

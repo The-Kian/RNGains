@@ -13,6 +13,11 @@ export const ScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  chartContainer: {
+    flex: 1,
+    padding: 8,
+    alignItems: 'center'
+  },
   loadingMessage: {
     fontSize: 16,
     marginBottom: 12,

@@ -4,18 +4,18 @@ import { Lift } from "../firestore/UserStatsTypes";
 import { LiftChart } from "./LiftHistory/LiftChart";
 import { ScrollView } from "react-native-gesture-handler";
 
-interface CarouselProps {
+interface LiftCarouselProps {
 	liftsData: Lift[];
 	children: (lifts: Lift[]) => JSX.Element;
 }
 
-export const Carousel = ({ liftsData, children }: CarouselProps) => {
+export const LiftCarousel = ({ liftsData, children }: LiftCarouselProps) => {
 	return (
 			<FlatList
 				horizontal={true}
-				showsHorizontalScrollIndicator={false}
+				showsHorizontalScrollIndicator={true}
 				scrollEventThrottle={200}
-				pagingEnabled
+				pagingEnabled = {true}
 				decelerationRate="fast"
 	            data={[liftsData]}
 				renderItem = {({ item }) => children(item)}
@@ -30,4 +30,4 @@ export const Carousel = ({ liftsData, children }: CarouselProps) => {
 	// );
 };
 
-export default Carousel;
+export default LiftCarousel;

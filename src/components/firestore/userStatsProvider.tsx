@@ -75,8 +75,8 @@ export function UserStatsProvider({ children }: ProviderProps) {
 			.collection("users")
 			.doc(userID)
 			.collection("lifts")
-			.orderBy("timestamp", "desc")
-			.limit(20)
+			.orderBy("timestamp", "asc")
+			.limit(5)
 			.get();
 
 		if (!querySnapshot.empty) {

@@ -44,12 +44,12 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 
 	return (
 		
-		<View style={ScreenStyle.rootContainer}>
+		<View style={ScreenStyle.chartContainer}>
 			<Text> {chartType} </Text>
 			<LineChart
 				data={line}
-				width={Dimensions.get("window").width} // from react-native
-				height={220}
+				width={Dimensions.get("window").width/1.3} // from react-native
+				height={400}
 				yAxisLabel=""
 				yAxisSuffix="kg"
 				yAxisInterval={1} // optional, defaults to 1
