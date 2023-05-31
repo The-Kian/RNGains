@@ -1,6 +1,7 @@
 import { useState, createContext, useEffect } from "react";
 import { Alert } from "react-native";
 import auth, {FirebaseAuthTypes} from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore'
 import { ProviderProps } from "../../constants/genericTypes";
 import { AuthContextType, defaultAuthContext } from "./AuthTypes";
 
@@ -50,6 +51,18 @@ export function AuthProvider({ children }: ProviderProps) {
 				Alert.alert("That email address is invalid!");
 			}
 		}
+		try {
+			await firestore()
+			.collection('users')
+			.doc(user?.uid)
+			.collection('details')
+			.add({
+				displayName: user?.displayName ?? email,
+				email: email
+			})
+		} catch (error) {
+			console.log(error.code)
+		}
 	};
 
 	const logout = async () => {
@@ -71,6 +84,18 @@ export function AuthProvider({ children }: ProviderProps) {
 			});
 		} catch (error) {
 			Alert.alert(error);
+		} 		
+		try {
+			await firestore()
+			.collection('users')
+			.doc(user?.uid)
+			.collection('details')
+			.add({
+				displayName: user?.displayName ?? user?.email,
+				email: user?.email
+			})
+		} catch (error) {
+			console.log(error.code)
 		}
     finally{
       setUser(auth().currentUser)
