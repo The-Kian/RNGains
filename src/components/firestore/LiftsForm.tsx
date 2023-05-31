@@ -11,7 +11,7 @@ import { ScreenStyle } from "../../constants/styles";
 export const LiftsForm = () => {
 
   const {user} = useContext(AuthContext)
-  const {uploadStats, latestLift} = useContext(UserStatsContext)
+  const {uploadStats, latestLift, fetchAllLifts} = useContext(UserStatsContext)
 
     const [enteredUserWeight, setUserWeight] = useState<string>('');
     const [enteredBenchWeight, setBenchWeight] = useState<string>('');
@@ -52,6 +52,7 @@ export const LiftsForm = () => {
         deadliftWeight: parseFloat(enteredDeadliftWeight),
         squatWeight: parseFloat(enteredSquatWeight),
       });
+      fetchAllLifts
     }
   
 

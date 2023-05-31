@@ -52,6 +52,7 @@ export function UserStatsProvider({ children }: ProviderProps) {
 		fetchLatestLift(user?.uid ?? '')
 	  }, [user])
 
+
 	const fetchLatestLift = async (userID: string) => {
 		const docSnapshot = await firestore()
 			.collection("users")
@@ -75,9 +76,9 @@ export function UserStatsProvider({ children }: ProviderProps) {
 			.collection("users")
 			.doc(userID)
 			.collection("lifts")
-			.orderBy("timestamp", "asc")
-			.limit(5)
-			.get();
+			.orderBy("timestamp", "desc")
+			.limit(20)
+			.get()
 
 		if (!querySnapshot.empty) {
 			const docs = querySnapshot.docs;
@@ -99,6 +100,7 @@ export function UserStatsProvider({ children }: ProviderProps) {
 		}
 
 	};
+
 
 	return (
 		<UserStatsContext.Provider value={{latestLift, uploadStats, fetchLatestLift, fetchAllLifts, allLifts}}>

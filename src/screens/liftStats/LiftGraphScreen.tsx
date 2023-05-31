@@ -13,9 +13,12 @@ function LiftGraphScreen() {
 	const { user } = useContext(AuthContext);
 
 	useEffect(() => {
-		fetchAllLifts(user.uid);
-	}, []);
+		const timer = setTimeout(() => { //This needs work
+			fetchAllLifts(user.uid);
+			console.log(`lifts for graph = ${allLifts}`)
+		}, 5000)
 
+	}, [allLifts]);
 
 	return (
 		<View style={ScreenStyle.rootContainer}>

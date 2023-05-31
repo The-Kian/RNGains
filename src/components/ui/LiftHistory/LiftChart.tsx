@@ -4,6 +4,7 @@ import { ScreenStyle } from "../../../constants/styles";
 import { Lift } from "../../firestore/UserStatsTypes";
 import { useEffect, useState } from "react";
 import LoadingOverlay from "../../../screens/LoadingOverlay";
+import { Colors } from "../../../constants/colors";
 
 export interface GraphProps {
 	lifts: Lift[];
@@ -33,10 +34,10 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 	  });
 
 	const line = {
-		labels: labels,
+		labels: labels.slice(0,6).reverse(),
 		datasets: [
 			{
-				data: liftData,
+				data: liftData.slice(0,6).reverse(),
 				strokeWidth: 2,
 			},
 		],
@@ -54,9 +55,9 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 				yAxisSuffix="kg"
 				yAxisInterval={1} // optional, defaults to 1
 				chartConfig={{
-					backgroundColor: "#e26a00",
-					backgroundGradientFrom: "#fb8c00",
-					backgroundGradientTo: "#ffa726",
+					backgroundColor: Colors.primaryMedium,
+					backgroundGradientFrom: Colors.primaryDark,
+					backgroundGradientTo: Colors.primaryDark,
 					decimalPlaces: 1, // optional, defaults to 2dp
 					color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
 					labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

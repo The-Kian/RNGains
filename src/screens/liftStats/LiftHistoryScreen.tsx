@@ -15,7 +15,6 @@ function LiftHistoryScreen() {
 		fetchAllLifts(user.uid);
 	}, []);
 
-
 	return (
 
 			<View style={ScreenStyle.rootContainer}>
