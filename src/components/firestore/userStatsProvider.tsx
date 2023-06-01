@@ -13,8 +13,11 @@ export const UserStatsContext = createContext(defaultUserStatsContext);
 export function UserStatsProvider({ children }: ProviderProps) {
 	const [latestLift, setLatestLift] = useState<Lift | null>(null);
 	const [allLifts, setAllLifts] = useState<Lift[] | null>(null)
+	const [liftsAdded, setLiftsAdded] = useState(0);
+
 	const {user} = useContext(AuthContext)
 	const [loading, setLoading] = useState(true)
+
 
 	const uploadStats = async ({
 		userID,
@@ -42,6 +45,7 @@ export function UserStatsProvider({ children }: ProviderProps) {
 			})
 			.then(() => {
 				Alert.alert("Data uploaded");
+				setLiftsAdded(liftsAdded + 1)
 			})
 			.catch((error) => {
 				Alert.alert("Error", error);
@@ -103,7 +107,7 @@ export function UserStatsProvider({ children }: ProviderProps) {
 
 
 	return (
-		<UserStatsContext.Provider value={{latestLift, uploadStats, fetchLatestLift, fetchAllLifts, allLifts}}>
+		<UserStatsContext.Provider value={{latestLift, fetchLatestLift, uploadStats, fetchAllLifts, allLifts, liftsAdded}}>
 			{children}
 		</UserStatsContext.Provider>
 	);
