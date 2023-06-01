@@ -28,6 +28,8 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 	const liftData = lifts.map((lift) => lift[liftWeightKey] as number);
 
 	const labels = lifts.map((lift) => {
+
+		console.log(`timestampsdmf = ${lift.timestamp.toDate()}`)
 		const date = lift.timestamp.toDate(); // Converts Firestore Timestamp to JavaScript Date
 		const dateString = `${date.getDate()}/${date.getMonth()}`
 		return dateString

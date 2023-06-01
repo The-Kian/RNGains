@@ -8,12 +8,12 @@ import { liftHistoryList } from "../../components/ui/LiftHistory/LiftHistoryList
 import { ScreenStyle } from "../../constants/styles";
 
 function LiftHistoryScreen() {
-	const { fetchAllLifts, allLifts } = useContext(UserStatsContext);
+	const { fetchAllLifts, allLifts, liftsAdded } = useContext(UserStatsContext);
 	const { user } = useContext(AuthContext);
 
 	useEffect(() => {
 		fetchAllLifts(user.uid);
-	}, []);
+	}, [liftsAdded]);
 
 	return (
 

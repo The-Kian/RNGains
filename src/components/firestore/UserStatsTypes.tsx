@@ -26,6 +26,7 @@ export interface UserStatsContextType {
 	fetchLatestLift: (userID: string) => void
 	fetchAllLifts: (userID: string) => void
 	allLifts?: Lift[] | null
+	liftsAdded: number
 }
 
 export const defaultUserStatsContext: UserStatsContextType = {
@@ -33,5 +34,6 @@ export const defaultUserStatsContext: UserStatsContextType = {
 	latestLift: null,
 	fetchLatestLift: async () => {},
 	fetchAllLifts:async () => {},
-	allLifts: null
+	allLifts: null,
+	liftsAdded: 0
 };
