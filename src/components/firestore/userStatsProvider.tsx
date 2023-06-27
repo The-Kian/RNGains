@@ -36,13 +36,14 @@ export function UserStatsProvider({ children }: ProviderProps) {
 			.collection("users")
 			.doc(userID)
 			.collection("lifts")
-			.add({
+			.doc()
+			.set({
 				userWeight: userWeight,
 				squatWeight: squatWeight,
 				deadliftWeight: deadliftWeight,
 				benchWeight: benchWeight,
 				timestamp: firestore.FieldValue.serverTimestamp(),
-			})
+			}, {merge: true})
 			.then(() => {
 				Alert.alert("Data uploaded");
 				setLiftsAdded(liftsAdded + 1)
@@ -77,8 +78,6 @@ export function UserStatsProvider({ children }: ProviderProps) {
 
 	const fetchAllLifts = async (userID: string) => {
 		const querySnapshot = await firestore()
-			.collection("users")
-			.doc(userID)
 			.collection("lifts")
 			.orderBy("timestamp", "desc")
 			.limit(20)
