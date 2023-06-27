@@ -48,8 +48,6 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 		await firestore()
 		  .collection('users')
 		  .doc(user?.uid)
-		  .collection('userDetails')
-		  .doc()
 		  .set({
 			displayName: user?.displayName ?? email,
 			email: email,
