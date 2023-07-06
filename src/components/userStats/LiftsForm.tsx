@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import Input from "../ui/Input";
 import { Colors } from "../../constants/colors";
 import Button from "../ui/Button";
-import { AuthContext } from "../auth/AuthProvider";
-import { UserStatsContext } from "./UserStatsProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
+import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
 import { ScreenStyle } from "../../constants/styles";
 
 export const LiftsForm = () => {

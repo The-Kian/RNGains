@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 
-import { CredentialsType } from "../../components/auth/AuthTypes";
+import { CredentialsType } from "../../context/auth/AuthTypes";
 import AuthContent from "../../components/auth/AuthContent";
 import LoadingOverlay from "../LoadingOverlay";
-import { AuthContext } from "../../components/auth/AuthProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
 
 function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);

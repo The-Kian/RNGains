@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { ScreenStyle } from "../../../constants/styles";
-import { Lift } from "../../firestore/UserStatsTypes";
+import { Lift } from "../../userStats/UserStatsTypes";
 
 export const liftHistoryList = ({ item }: { item: Lift }) => {
     return (

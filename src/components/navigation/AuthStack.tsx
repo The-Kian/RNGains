@@ -2,7 +2,7 @@ import { Colors } from "../../constants/colors";
 import LoginScreen from "../../screens/authScreens/LoginScreen";
 import SignupScreen from "../../screens/authScreens/SignupScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AuthStackParamList } from "./NavigationTypes";
+import { AuthStackParamList } from "../../context/navigation/NavigationTypes";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
