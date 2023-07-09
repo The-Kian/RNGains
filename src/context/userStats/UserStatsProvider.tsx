@@ -78,6 +78,8 @@ export function UserStatsProvider({ children }: ProviderProps) {
 
 	const fetchAllLifts = async (userID: string) => {
 		const querySnapshot = await firestore()
+			.collection("users")
+			.doc(userID)
 			.collection("lifts")
 			.orderBy("timestamp", "desc")
 			.limit(20)
