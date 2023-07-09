@@ -1,27 +1,30 @@
-import React from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import {  View, FlatList } from 'react-native';
 import { useInfiniteHits, UseInfiniteHitsProps } from 'react-instantsearch-hooks';
-import { userDetailHit } from '../../../context/userDetail/userDetailHitTypes';
+
 
 type InfiniteHitsProps<THit> = UseInfiniteHitsProps & {
   hitComponent: (props: {hit: THit}) => JSX.Element;
 }
 
-export function InfiniteHits<THit>({ hitComponent: Hit, ...props }: InfiniteHitsProps<THit>) {
+export function InfiniteHits<THit>({ hitComponent: Hit, hide, ...props }: InfiniteHitsProps<THit> & {hide: boolean}) {
   const { hits, isLastPage, showMore } = useInfiniteHits(props);
+
+  if (hide) {
+    return null;
+  }
 
   return (
     <FlatList
       data={hits}
       keyExtractor={(item) => item.objectID}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
+      ItemSeparatorComponent={() => <View />}
       onEndReached={() => {
         if (!isLastPage) {
           showMore();
         }
       }}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <View >
           <Hit hit={item as THit}/>
         </View>
       )}
@@ -29,12 +32,3 @@ export function InfiniteHits<THit>({ hitComponent: Hit, ...props }: InfiniteHits
   );
 };
 
-const styles = StyleSheet.create({
-  separator: {
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-  },
-  item: {
-    padding: 18,
-  },
-});
