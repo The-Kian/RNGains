@@ -1,17 +1,20 @@
 
 import { useContext } from "react";
 import React from "react";
-import { Text, View } from "react-native";
-import { AuthContext } from "../../context/auth/AuthProvider";
 
-import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
+import { useContext } from "react";
+import React from "react";
+import { Text, View } from "react-native";
+
+
 import LiftCarousel from "../../components/ui/LiftCarousel";
 
 import { ScreenStyle } from "../../constants/styles";
 import { LiftChart } from "../../components/ui/LiftHistory/LiftChart";
 import { useFocusEffect } from "@react-navigation/native";
-import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
-import { AuthContext } from "../../components/auth/AuthProvider";
+import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
+
 
 function LiftGraphScreen() {
 	const { fetchAllLifts, allLifts, liftsAdded} = useContext(UserStatsContext);
