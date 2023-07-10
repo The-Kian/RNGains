@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { FlatList, Text, View } from "react-native";
-import { AuthContext } from "../../components/auth/AuthProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
 
-import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
+import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
 
 import { liftHistoryList } from "../../components/ui/LiftHistory/LiftHistoryList";
 import { ScreenStyle } from "../../constants/styles";

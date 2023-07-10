@@ -3,13 +3,13 @@
 import { Alert, View } from "react-native";
 import { useState } from "react";
 
-import { CredentialsType } from "./AuthTypes";
-import { AuthProps } from "./AuthTypes";
+import { CredentialsType } from "../../context/auth/AuthTypes";
+import { AuthProps } from "../../context/auth/AuthTypes";
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
 import {ScreenStyle } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
-import { authScreenProp } from "./AuthTypes";
+import { authScreenProp } from "../../context/auth/AuthTypes";
 
 
 function AuthContent({ authScreenType, onSubmit }: AuthProps) {

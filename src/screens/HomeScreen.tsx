@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { Text, View } from 'react-native';
 
-import { AuthContext } from '../components/auth/AuthProvider';
+import { AuthContext } from '../context/auth/AuthProvider';
 import { ScreenStyle } from '../constants/styles';
 
 function HomeScreen() {

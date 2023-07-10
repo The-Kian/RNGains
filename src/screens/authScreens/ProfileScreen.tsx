@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import { useContext, useState } from "react";
 
-import { AuthContext } from "../../components/auth/AuthProvider";
-import { CredentialsType } from "../../components/auth/AuthTypes";
+import { AuthContext } from "../../context/auth/AuthProvider";
+import { CredentialsType } from "../../context/auth/AuthTypes";
 import AuthContent from "../../components/auth/AuthContent";
 import { ScreenStyle } from "../../constants/styles";
 import LoadingOverlay from "../LoadingOverlay";

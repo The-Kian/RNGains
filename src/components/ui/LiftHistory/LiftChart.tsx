@@ -1,7 +1,7 @@
 import { Dimensions, Text, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { ScreenStyle } from "../../../constants/styles";
-import { Lift } from "../../firestore/UserStatsTypes";
+import { Lift } from "../../userStats/UserStatsTypes";
 import { useEffect, useState } from "react";
 import LoadingOverlay from "../../../screens/LoadingOverlay";
 import { Colors } from "../../../constants/colors";

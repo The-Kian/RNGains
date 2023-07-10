@@ -1,7 +1,7 @@
 
 
 import { Text, View } from "react-native";
-import { LiftsForm } from "../../components/firestore/LiftsForm";
+import { LiftsForm } from "../../components/userStats/LiftsForm";
 import { ScreenStyle } from "../../constants/styles";
 
 export default function UpdateLiftsScreen() {

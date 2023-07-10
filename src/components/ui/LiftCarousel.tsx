@@ -1,5 +1,5 @@
 import { FlatList } from "react-native";
-import { Lift } from "../firestore/UserStatsTypes";
+import { Lift } from "../../context/userStats/UserStatsTypes";
 
 import { LiftChart } from "./LiftHistory/LiftChart";
 import { ScrollView } from "react-native-gesture-handler";
