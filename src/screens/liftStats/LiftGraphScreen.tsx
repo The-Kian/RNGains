@@ -1,25 +1,26 @@
-import { useContext, useEffect } from "react";
-import { Text, View } from "react-native";
-import { AuthContext } from "../../components/auth/AuthProvider";
 
-import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
+import { useContext } from "react";
+import React from "react";
+import { Text, View } from "react-native";
+
 import LiftCarousel from "../../components/ui/LiftCarousel";
 
 import { ScreenStyle } from "../../constants/styles";
 import { LiftChart } from "../../components/ui/LiftHistory/LiftChart";
+import { useFocusEffect } from "@react-navigation/native";
+import { UserStatsContext } from "../../components/firestore/UserStatsProvider";
+import { AuthContext } from "../../components/auth/AuthProvider";
 
 function LiftGraphScreen() {
 	const { fetchAllLifts, allLifts, liftsAdded} = useContext(UserStatsContext);
 	const { user } = useContext(AuthContext);
 
-	useEffect (() => {
+	useFocusEffect(
+		React.useCallback(() => {
+			fetchAllLifts(user.uid);
+		}, [user.uid])
+	);
 
-		const fetchData = async () => {
-			await fetchAllLifts(user.uid);
-		}
-		
-		console.log(liftsAdded)
-	}, [liftsAdded]);
 	return (
 		<View style={ScreenStyle.rootContainer}>
 			<Text style={ScreenStyle.title}>grphs!</Text>
