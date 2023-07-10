@@ -1,9 +1,6 @@
 
 import { useContext } from "react";
 import React from "react";
-
-import { useContext } from "react";
-import React from "react";
 import { Text, View } from "react-native";
 
 
