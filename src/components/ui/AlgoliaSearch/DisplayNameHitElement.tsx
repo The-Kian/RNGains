@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { userDetailHit } from "../../../context/algoliaHit/algoliaHitTypes";
+import { userDetailHit } from "../../../constants/algoliaHit/algoliaHitTypes";
 
 interface HitProps {
     hit: userDetailHit;

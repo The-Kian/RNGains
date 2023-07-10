@@ -7,7 +7,7 @@ import { InstantSearch, UseHitsProps, useHits } from 'react-instantsearch-hooks'
 import { SearchBox } from '../components/ui/AlgoliaSearch/SearchBox';
 import { InfiniteHits } from '../components/ui/AlgoliaSearch/InfiniteHits';
 import { DisplayNameHitElement } from '../components/ui/AlgoliaSearch/DisplayNameHitElement';
-import { algoliaClient } from '../constants/algolia';
+import { algoliaClient } from '../constants/algoliaHit/algolia';
 import { useState } from 'react';
 
 
