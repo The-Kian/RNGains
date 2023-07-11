@@ -18,14 +18,14 @@ export function InfiniteHits<THit>({ hitComponent: Hit, hide, ...props }: Infini
     <FlatList
       data={hits}
       keyExtractor={(item) => item.objectID}
-      ItemSeparatorComponent={() => <View />}
+      ItemSeparatorComponent={() => <View style={algoliaStyles.seperator}/>}
       onEndReached={() => {
         if (!isLastPage) {
           showMore();
         }
       }}
       renderItem={({ item }) => (
-        <View >
+        <View style={algoliaStyles.item}>
           <Hit hit={item as THit}/>
         </View>
       )}

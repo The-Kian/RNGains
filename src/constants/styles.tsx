@@ -130,12 +130,22 @@ export const inputStyles = StyleSheet.create({
 export const algoliaStyles = StyleSheet.create({
   container: {
     backgroundColor: '#252b33',
-    padding: 18,
+    padding: 16,
+    marginBottom: 16,
+  },
+  seperator: {
+    padding: 8,
+  },
+  item: {
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 16,
+    borderColor: Colors.primaryDark,
   },
   input: {
     height: 48,
     width: 200,
-    padding: 12,
+    padding: 16,
     fontSize: 16,
     backgroundColor: '#fff',
     borderRadius: 4,
