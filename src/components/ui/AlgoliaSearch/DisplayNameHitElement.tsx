@@ -1,9 +1,10 @@
 import { Text } from "react-native";
 import { userDetailHit } from "../../../constants/algoliaHit/algoliaHitTypes";
 import { Button } from "react-native";
-import { FriendsFirebaseFunctions } from "../../friends/FriendsFirebaseFunctions";
+
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth/AuthProvider";
+import { sendFriendRequest } from "../../../components/friends/FriendRequest";
 
 interface HitProps {
 	hit: userDetailHit;
@@ -11,15 +12,12 @@ interface HitProps {
 
 export function DisplayNameHitElement({ hit }: HitProps) {
 	const { user } = useContext(AuthContext);
-	const { requestFriend } = FriendsFirebaseFunctions({
-		userID: user.uid,
-		friendID: hit.objectID,
-	});
+
 
 	return (
 		<>
 			<Text>{hit.displayName}</Text>
-			<Button title="Add Friend" onPress={requestFriend} />
+			<Button title="Add Friend" onPress={() => sendFriendRequest({ userID: user.uid, friendID: hit.objectID })} />
 		</>
 	);
 }

@@ -9,7 +9,7 @@ import {
 
 import HomeScreen from "../../screens/HomeScreen";
 import { Colors } from "../../constants/colors";
-import FriendsScreen from "../../screens/FriendsScreen";
+import FriendsScreen from "../../screens/friends/FriendsScreen";
 import { AuthContext } from "../../context/auth/AuthProvider";
 import ProfileScreen from "../../screens/authScreens/ProfileScreen";
 import UpdateStatsScreen from "../../screens/liftStats/UpdateLiftsScreen";
