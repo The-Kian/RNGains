@@ -1,29 +1,38 @@
-
-
-
-import { Text, View } from 'react-native';
-import { ScreenStyle } from '../../constants/styles';
-import { InstantSearch, UseHitsProps, useHits } from 'react-instantsearch-hooks';
-import { SearchBox } from '../../components/ui/FriendRequests/SearchBox';
-import { InfiniteHits } from '../../components/ui/FriendRequests/InfiniteHits';
-import { DisplayNameHitElement } from '../../components/ui/FriendRequests/DisplayNameHitElement';
-import { algoliaClient } from '../../constants/algoliaHit/algolia';
-import { useState } from 'react';
-
-
-
+import { Text, View } from "react-native";
+import { ScreenStyle } from "../../constants/styles";
+import {
+	InstantSearch,
+	UseHitsProps,
+	useHits,
+  Configure,
+} from "react-instantsearch-hooks";
+import { SearchBox } from "../../components/ui/FriendRequests/SearchBox";
+import { InfiniteHits } from "../../components/ui/FriendRequests/InfiniteHits";
+import { DisplayNameHitElement } from "../../components/ui/FriendRequests/DisplayNameHitElement";
+import { algoliaClient } from "../../constants/algoliaHit/algolia";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/auth/AuthProvider";
 
 export default function SearchFriendsView() {
-  const [query, setQuery] = useState('');
+	const [query, setQuery] = useState("");
 
-  return (
-    <View style={ScreenStyle.rootContainer}>
-      <InstantSearch searchClient={algoliaClient} indexName="dev_RNGains">
-        <Text>Search</Text>
-        <SearchBox onQueryChange={setQuery}/>
-        <InfiniteHits hitComponent={DisplayNameHitElement} hide={query.trim() === ''}/>
-      </InstantSearch>
+	const [searchState, setSearchState] = useState({});
 
-    </View>
-  );
+	const { user } = useContext(AuthContext);
+
+	const userDisplayName = user.displayName;
+
+	return (
+		<View style={ScreenStyle.rootContainer}>
+			<InstantSearch searchClient={algoliaClient} indexName="dev_RNGains">
+				<Configure filters={`NOT displayName:${userDisplayName}`} />
+				<Text>Search</Text>
+				<SearchBox onQueryChange={setQuery} />
+				<InfiniteHits
+					hitComponent={DisplayNameHitElement}
+					hide={query.trim() === ""}
+				/>
+			</InstantSearch>
+		</View>
+	);
 }

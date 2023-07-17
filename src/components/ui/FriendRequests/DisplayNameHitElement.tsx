@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { userDetailHit } from "../../../constants/algoliaHit/algoliaHitTypes";
 import { Button } from "react-native";
 
@@ -13,11 +13,19 @@ interface HitProps {
 export function DisplayNameHitElement({ hit }: HitProps) {
 	const { user } = useContext(AuthContext);
 
+	const shouldRenderFriend = hit.objectID !== user.uid;
 
-	return (
-		<>
-			<Text>{hit.displayName}</Text>
-			<Button title="Add Friend" onPress={() => sendFriendRequest({ userID: user.uid, friendID: hit.objectID })} />
-		</>
-	);
+
+		return (
+			<View>
+				<Text>{hit.displayName}</Text>
+				<Button
+					title="Add Friend"
+					onPress={() =>
+						sendFriendRequest({ userID: user.uid, friendID: hit.objectID })
+					}
+				/>
+			</View>
+		);
+	
 }
