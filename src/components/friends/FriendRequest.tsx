@@ -4,7 +4,7 @@ import firestore, {
 import { Alert } from "react-native";
 import React from "react";
 
-interface sendFriendRequestProps {
+interface friendRequestProps {
 	userID: string;
 	friendID: string;
 }
@@ -28,6 +28,7 @@ const addFriendRequestToUser = ({
 		.collection("friends")
 		.doc(friendID);
 	batch.set(userFriendsRef, {
+		friendID: friendID,
 		status: status,
 		timestamp: firestore.FieldValue.serverTimestamp(),
 	});
@@ -36,7 +37,7 @@ const addFriendRequestToUser = ({
 export const sendFriendRequest = async ({
 	userID,
 	friendID,
-}: sendFriendRequestProps) => {
+}: friendRequestProps) => {
 	const batch = firestore().batch();
 
 	addFriendRequestToUser({
@@ -62,3 +63,34 @@ export const sendFriendRequest = async ({
 			Alert.alert(error.message);
 		});
 };
+
+export const acceptFriendRequest = async ({
+	userID,
+	friendID,
+}: friendRequestProps) => {
+	const batch = firestore().batch();
+	console.log('acceptFriendRequest')
+
+	addFriendRequestToUser({
+		batch,
+		userID,
+		friendID,
+		status: "accepted",
+	});
+
+	addFriendRequestToUser({
+		batch,
+		userID: friendID,
+		friendID: userID,
+		status: "accepted",
+	});
+
+	return batch
+		.commit()
+		.then(() => {
+			Alert.alert("Friend request accepted");
+		})
+		.catch((error) => {
+			Alert.alert(error.message);
+		});
+}

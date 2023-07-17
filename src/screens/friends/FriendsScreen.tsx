@@ -2,7 +2,7 @@
 import { Button, View } from "react-native";
 import { useState } from "react";
 
-import FeedView from "./FeedView";
+import FriendRequestView from "./FriendRequestView";
 import SearchFriendsView from "./SearchFriendsView";
 import { ScreenStyle } from "../../constants/styles";
 
@@ -12,10 +12,10 @@ export default function FriendsScreen() {
   return (
     <View style={ScreenStyle.rootContainer}>
       <View>
-        <Button title="Feed" onPress={() => setActiveView('feed')} />
+        <Button title="Friend Requests" onPress={() => setActiveView('friendRequests')} />
         <Button title="Search" onPress={() => setActiveView('search')} />
       </View>
-      {activeView === 'feed' ? <FeedView /> : <SearchFriendsView />}
+      {activeView === 'friendRequests' ? <FriendRequestView /> : <SearchFriendsView />}
     </View>
   );
 }

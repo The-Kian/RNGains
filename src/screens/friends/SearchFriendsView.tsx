@@ -4,9 +4,9 @@
 import { Text, View } from 'react-native';
 import { ScreenStyle } from '../../constants/styles';
 import { InstantSearch, UseHitsProps, useHits } from 'react-instantsearch-hooks';
-import { SearchBox } from '../../components/ui/AlgoliaSearch/SearchBox';
-import { InfiniteHits } from '../../components/ui/AlgoliaSearch/InfiniteHits';
-import { DisplayNameHitElement } from '../../components/ui/AlgoliaSearch/DisplayNameHitElement';
+import { SearchBox } from '../../components/ui/FriendRequests/SearchBox';
+import { InfiniteHits } from '../../components/ui/FriendRequests/InfiniteHits';
+import { DisplayNameHitElement } from '../../components/ui/FriendRequests/DisplayNameHitElement';
 import { algoliaClient } from '../../constants/algoliaHit/algolia';
 import { useState } from 'react';
 

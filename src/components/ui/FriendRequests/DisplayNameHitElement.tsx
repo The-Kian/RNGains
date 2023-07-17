@@ -4,7 +4,7 @@ import { Button } from "react-native";
 
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth/AuthProvider";
-import { sendFriendRequest } from "../../../components/friends/FriendRequest";
+import { sendFriendRequest } from "../../friends/FriendRequest";
 
 interface HitProps {
 	hit: userDetailHit;
