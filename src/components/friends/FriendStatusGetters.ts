@@ -14,7 +14,7 @@ const getFriendDetails = async (friendsRequests: string[]) => {
 			};
 		})
 	);
-	console.log("friendDetails", friendDetails);
+
 	return friendDetails;
 };
 
@@ -23,7 +23,7 @@ export const getFriendRequests = async (userID: string) => {
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
-	const query = userFriendsRef.where("status", "==", "received");
+	const query = userFriendsRef.where("status", "==", "accepted");
 	const querySnapshot = await query.get();
 
 	const friendRequests: string[] = [];
@@ -34,4 +34,22 @@ export const getFriendRequests = async (userID: string) => {
 	});
 
 	return getFriendDetails(friendRequests);
+};
+
+export const getCurrentFriends = async (userID: string) => {
+	const userFriendsRef = firestore()
+		.collection("users")
+		.doc(userID)
+		.collection("friends");
+	const query = userFriendsRef.where("status", "==", "received");
+	const querySnapshot = await query.get();
+
+	const currentFriends: string[] = [];
+
+	querySnapshot.forEach((doc) => {
+		const friendID = doc.data().friendID;
+		currentFriends.push(friendID);
+	});
+
+	return getFriendDetails(currentFriends);
 };

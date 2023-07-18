@@ -4,7 +4,7 @@ import { AuthProps } from "../../context/auth/AuthTypes";
 import { View } from "react-native";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
-import { buttonStyles } from "../../constants/styles";
+import { buttonStyles } from "../../constants/styles/buttonStyles";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth/AuthProvider";
 

@@ -69,8 +69,6 @@ export const acceptFriendRequest = async ({
 	friendID,
 }: friendRequestProps) => {
 	const batch = firestore().batch();
-	console.log('acceptFriendRequest')
-
 	addFriendRequestToUser({
 		batch,
 		userID,

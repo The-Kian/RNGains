@@ -1,5 +1,5 @@
 import {  View, Text} from 'react-native';
-import { algoliaStyles } from '../../../constants/styles';
+import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 import { Button } from 'react-native';
 import { acceptFriendRequest } from '../../friends/FriendRequest';
 

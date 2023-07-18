@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks";
-import { algoliaStyles } from "../../../constants/styles";
+import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 
 export function SearchBox({
 	onQueryChange,

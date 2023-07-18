@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { Text, View } from 'react-native';
 
 import { AuthContext } from '../context/auth/AuthProvider';
-import { ScreenStyle } from '../constants/styles';
+import { ScreenStyle } from '../constants/styles/screenStyles';
 
 function HomeScreen() {
 

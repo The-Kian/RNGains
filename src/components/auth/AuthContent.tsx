@@ -7,7 +7,7 @@ import { CredentialsType } from "../../context/auth/AuthTypes";
 import { AuthProps } from "../../context/auth/AuthTypes";
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
-import {ScreenStyle } from "../../constants/styles";
+import {ScreenStyle } from "../../constants/styles/screenStyles";
 import { useNavigation } from "@react-navigation/native";
 import { authScreenProp } from "../../context/auth/AuthTypes";
 

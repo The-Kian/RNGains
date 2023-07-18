@@ -4,7 +4,8 @@ import { useState } from "react";
 
 import FriendRequestView from "./FriendRequestView";
 import SearchFriendsView from "./SearchFriendsView";
-import { ScreenStyle } from "../../constants/styles";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
+import FriendsFeedView from "./FriendsFeedView";
 
 
 export default function FriendsScreen() {
@@ -12,10 +13,10 @@ export default function FriendsScreen() {
   return (
     <View style={ScreenStyle.rootContainer}>
       <View>
-        <Button title="Friend Requests" onPress={() => setActiveView('friendRequests')} />
-        <Button title="Search" onPress={() => setActiveView('search')} />
+        <Button title="Manage Friends" onPress={() => setActiveView('friendRequests')} />
+        <Button title="Feed" onPress={() => setActiveView('feed')} />
       </View>
-      {activeView === 'friendRequests' ? <FriendRequestView /> : <SearchFriendsView />}
+      {activeView === 'friendRequests' ? <FriendRequestView /> : <FriendsFeedView />}
     </View>
   );
 }

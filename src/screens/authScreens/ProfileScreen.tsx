@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth/AuthProvider";
 import { CredentialsType } from "../../context/auth/AuthTypes";
 import AuthContent from "../../components/auth/AuthContent";
-import { ScreenStyle } from "../../constants/styles";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
 import LoadingOverlay from "../LoadingOverlay";
 
 export default function ProfileScreen() {

@@ -6,7 +6,7 @@ import { Text, View } from "react-native";
 
 import LiftCarousel from "../../components/ui/LiftCarousel";
 
-import { ScreenStyle } from "../../constants/styles";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
 import { LiftChart } from "../../components/ui/LiftHistory/LiftChart";
 import { useFocusEffect } from "@react-navigation/native";
 import { UserStatsContext } from "../../context/userStats/UserStatsProvider";

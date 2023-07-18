@@ -1,6 +1,6 @@
 import {  View, FlatList } from 'react-native';
 import { useInfiniteHits, UseInfiniteHitsProps } from 'react-instantsearch-hooks';
-import { algoliaStyles } from '../../../constants/styles';
+import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 import { Button } from 'react-native';
 
 type InfiniteHitsProps<THit> = UseInfiniteHitsProps & {

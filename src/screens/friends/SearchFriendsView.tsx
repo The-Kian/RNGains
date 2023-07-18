@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { ScreenStyle } from "../../constants/styles";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
 import {
 	InstantSearch,
 	UseHitsProps,

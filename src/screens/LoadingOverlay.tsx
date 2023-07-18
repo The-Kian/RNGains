@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { ScreenStyle } from '../constants/styles';
+import { ScreenStyle } from '../constants/styles/screenStyles';
 
 function LoadingOverlay(props: { message: string }) {
   return (

@@ -2,7 +2,7 @@
 
 import { Text, View } from "react-native";
 import { LiftsForm } from "../../components/userStats/LiftsForm";
-import { ScreenStyle } from "../../constants/styles";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
 
 export default function UpdateLiftsScreen() {
 

@@ -1,39 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Text, View } from 'react-native';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/auth/AuthProvider';
-import { getFriendRequests } from '../../components/friends/FriendFeedGetter';
-import { acceptFriendRequest } from '../../components/friends/FriendRequest';
-
-
-
+import React, { useEffect, useState } from "react";
+import { Button, Text, View } from "react-native";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth/AuthProvider";
+import { getCurrentFriends, getFriendRequests } from "../../components/friends/FriendStatusGetters";
+import { acceptFriendRequest } from "../../components/friends/FriendRequest";
+import SearchFriendsView from "./SearchFriendsView";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
+import { algoliaStyles } from "../../constants/styles/algoliaStyles";
+import { contentStyle } from "../../constants/styles/contentStyles";
 
 export default function FriendRequestView() {
-    const { user } = useContext(AuthContext);
-	const [friendRequests, setFriendRequests] = useState<{ id: string; displayName: string; }[]>([]);
+	const { user } = useContext(AuthContext);
+	const [friendRequests, setFriendRequests] = useState<
+		{ id: string; displayName: string }[]
+	>([]);
+	const [currentFriends, setCurentFriends] = useState<
+		{ id: string; displayName: string }[]
+	>([]);
+	const [activeView, setActiveView] = useState("search");
 
 	const userID = user.uid;
+	
+	const fetchFriends = async () => {
+		const friendRequests = await getFriendRequests(userID);
+		const currentFriends = await getCurrentFriends(userID);
+		setFriendRequests(friendRequests);
+		setCurentFriends(currentFriends);
+	};
 
-        useEffect(() => {
-			const fetchFriendRequests = async () => {
-				const friendRequests = await getFriendRequests(userID);
-				setFriendRequests(friendRequests);
-			};
-			fetchFriendRequests()
+	const friendRequestResponseHandler = async (userID: string, friendID: string, response: string) => {
+		if (response === "accept") {
+			await acceptFriendRequest({ userID, friendID });
+		} else if (response === "decline") {
+			console.log('denied')
+		}
+		fetchFriends();
+	};
 
-        }, [friendRequests])
 
+	useEffect(() => {
+		fetchFriends();
+	}, [friendRequests, currentFriends]);
+
+	const FriendRequestFeed = () => {
 		return (
-			<View>
-			  {friendRequests.map((request) => (
-				<View key={request.id}>
-				  <Text>FriendRequest from {request.displayName}</Text>
-				  <Button
-					title="Accept"
-					onPress={() => acceptFriendRequest({ userID, friendID: request.id })}
-				  />
+			<View style={contentStyle.friendFeedContent}>
+				<View>
+					{friendRequests.map((request) => (
+						<View style={ScreenStyle.friendStatusContainer} key={request.id}>
+							<Text>FriendRequest from {request.displayName}</Text>
+							<Button
+								title="Accept"
+								onPress={() =>
+									friendRequestResponseHandler(userID, request.id, "accept")
+								}
+							/>
+							<Button
+								title="Decline"
+								onPress={() =>
+									friendRequestResponseHandler(userID, request.id, "decline")
+								}
+							/>
+						</View>
+					))}
 				</View>
-			  ))}
+
+				<View>
+					{friendRequests.map((friendData) => (
+						<View style={ScreenStyle.friendStatusContainer} key={friendData.id}>
+							<Text>Friends with {friendData.displayName}</Text>
+						</View>
+					))}
+				</View>
 			</View>
 		);
+	};
+
+	return (
+		<View style={ScreenStyle.rootContainer}>
+			<View>
+				<Button title="Search" onPress={() => setActiveView("search")} />
+				<Button
+					title="View Friends"
+					onPress={() => setActiveView("friendRequests")}
+				/>
+			</View>
+			{activeView === "friendRequests" ? (
+				<FriendRequestFeed />
+			) : (
+				<SearchFriendsView />
+			)}
+		</View>
+	);
 }
