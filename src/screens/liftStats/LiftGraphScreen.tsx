@@ -14,7 +14,7 @@ import { AuthContext } from "../../context/auth/AuthProvider";
 
 
 function LiftGraphScreen() {
-	const { fetchAllLifts, allLifts, liftsAdded} = useContext(UserStatsContext);
+	const { fetchAllLifts, allLifts} = useContext(UserStatsContext);
 	const { user } = useContext(AuthContext);
 
 	useFocusEffect(

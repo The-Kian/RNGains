@@ -4,7 +4,7 @@ import {
 	InstantSearch,
 	UseHitsProps,
 	useHits,
-  Configure,
+	Configure,
 } from "react-instantsearch-hooks";
 import { SearchBox } from "../../components/ui/FriendRequests/SearchBox";
 import { InfiniteHits } from "../../components/ui/FriendRequests/InfiniteHits";

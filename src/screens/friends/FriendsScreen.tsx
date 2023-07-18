@@ -9,14 +9,14 @@ import FriendsFeedView from "./FriendsFeedView";
 
 
 export default function FriendsScreen() {
-  const [activeView, setActiveView] = useState("feed");
-  return (
-    <View style={ScreenStyle.rootContainer}>
-      <View>
-        <Button title="Manage Friends" onPress={() => setActiveView('friendRequests')} />
-        <Button title="Feed" onPress={() => setActiveView('feed')} />
-      </View>
-      {activeView === 'friendRequests' ? <FriendRequestView /> : <FriendsFeedView />}
-    </View>
-  );
+	const [activeView, setActiveView] = useState("feed");
+	return (
+		<View style={ScreenStyle.rootContainer}>
+			<View>
+				<Button title="Manage Friends" onPress={() => setActiveView('friendRequests')} />
+				<Button title="Feed" onPress={() => setActiveView('feed')} />
+			</View>
+			{activeView === 'friendRequests' ? <FriendRequestView /> : <FriendsFeedView />}
+		</View>
+	);
 }

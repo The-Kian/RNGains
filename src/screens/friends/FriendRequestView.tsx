@@ -6,7 +6,7 @@ import { getCurrentFriends, getFriendRequests } from "../../components/friends/F
 import { acceptFriendRequest } from "../../components/friends/FriendRequest";
 import SearchFriendsView from "./SearchFriendsView";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
-import { algoliaStyles } from "../../constants/styles/algoliaStyles";
+
 import { contentStyle } from "../../constants/styles/contentStyles";
 
 export default function FriendRequestView() {

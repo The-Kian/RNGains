@@ -4,10 +4,10 @@ import { Button } from 'react-native';
 import { acceptFriendRequest } from '../../friends/FriendRequest';
 
 export function FriendRequests() {
-  return (
-    <View>
-      <Text>FriendRequest from </Text>
-      <Button title="Accept" onPress={() => {acceptFriendRequest}}/>
-    </View>
-  )
+	return (
+		<View>
+			<Text>FriendRequest from </Text>
+			<Button title="Accept" onPress={() => {acceptFriendRequest}}/>
+		</View>
+	)
 }

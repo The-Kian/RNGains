@@ -16,16 +16,16 @@ export function DisplayNameHitElement({ hit }: HitProps) {
 	const shouldRenderFriend = hit.objectID !== user.uid;
 
 
-		return (
-			<View>
-				<Text>{hit.displayName}</Text>
-				<Button
-					title="Add Friend"
-					onPress={() =>
-						sendFriendRequest({ userID: user.uid, friendID: hit.objectID })
-					}
-				/>
-			</View>
-		);
+	return (
+		<View>
+			<Text>{hit.displayName}</Text>
+			<Button
+				title="Add Friend"
+				onPress={() =>
+					sendFriendRequest({ userID: user.uid, friendID: hit.objectID })
+				}
+			/>
+		</View>
+	);
 	
 }

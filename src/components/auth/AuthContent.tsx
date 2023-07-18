@@ -7,9 +7,9 @@ import { CredentialsType } from "../../context/auth/AuthTypes";
 import { AuthProps } from "../../context/auth/AuthTypes";
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
-import {ScreenStyle } from "../../constants/styles/screenStyles";
 import { useNavigation } from "@react-navigation/native";
 import { authScreenProp } from "../../context/auth/AuthTypes";
+import { contentStyle } from '../../constants/styles/contentStyles';
 
 
 function AuthContent({ authScreenType, onSubmit }: AuthProps) {
@@ -61,7 +61,7 @@ function AuthContent({ authScreenType, onSubmit }: AuthProps) {
 	}
 
 	return (
-		<View style={ScreenStyle.authContent}>
+		<View style={contentStyle.authContent}>
 			<AuthForm
 				onSubmit={submitHandler}
 				credentialsInvalid={credentialsInvalid}

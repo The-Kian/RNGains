@@ -17,15 +17,15 @@ function LiftHistoryScreen() {
 
 	return (
 
-			<View style={ScreenStyle.rootContainer}>
-				<Text style={ScreenStyle.title}>Welcome!</Text>
-				<Text style={ScreenStyle.welcomeText}> </Text>
-				<FlatList
-					data={allLifts}
-					keyExtractor={(item) => item.id}
-					renderItem={liftHistoryList}
-				/>
-			</View>
+		<View style={ScreenStyle.rootContainer}>
+			<Text style={ScreenStyle.title}>Welcome!</Text>
+			<Text style={ScreenStyle.welcomeText}> </Text>
+			<FlatList
+				data={allLifts}
+				keyExtractor={(item) => item.id}
+				renderItem={liftHistoryList}
+			/>
+		</View>
 		
 	);
 }

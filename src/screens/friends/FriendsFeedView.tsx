@@ -2,8 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 
 export default function FriendsFeedView () {
-    return (
-        <View>
-        </View>
-    );
+	return (
+		<View>
+		</View>
+	);
 }

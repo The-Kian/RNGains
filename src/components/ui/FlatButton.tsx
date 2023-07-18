@@ -5,16 +5,16 @@ import { Pressable, Text, View } from 'react-native';
 import { buttonStyles } from "../../constants/styles/buttonStyles";
 
 function FlatButton(props: { children: ReactNode, onPress: () => void }) {
-  return (
-    <Pressable
-      style={({ pressed }) => [buttonStyles.flatButton, pressed && buttonStyles.buttonPressed]}
-      onPress={props.onPress}
-    >
-      <View>
-        <Text style={buttonStyles.buttonText}>{props.children}</Text>
-      </View>
-    </Pressable>
-  );
+	return (
+		<Pressable
+			style={({ pressed }) => [buttonStyles.flatButton, pressed && buttonStyles.buttonPressed]}
+			onPress={props.onPress}
+		>
+			<View>
+				<Text style={buttonStyles.buttonText}>{props.children}</Text>
+			</View>
+		</Pressable>
+	);
 }
 
 export default FlatButton;

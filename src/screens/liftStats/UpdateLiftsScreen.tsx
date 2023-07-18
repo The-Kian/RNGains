@@ -6,9 +6,9 @@ import { ScreenStyle } from "../../constants/styles/screenStyles";
 
 export default function UpdateLiftsScreen() {
 
-  return (
-    <View style={ScreenStyle.rootContainer}>
-      <Text style={ScreenStyle.title}>New PR?</Text>
-      <LiftsForm></LiftsForm>
-    </View>  );
+	return (
+		<View style={ScreenStyle.rootContainer}>
+			<Text style={ScreenStyle.title}>New PR?</Text>
+			<LiftsForm></LiftsForm>
+		</View>  );
 }
