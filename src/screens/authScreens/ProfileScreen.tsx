@@ -1,26 +1,26 @@
-import { View } from "react-native";
-import { useContext, useState } from "react";
+import { View } from 'react-native'
+import { useContext, useState } from 'react'
 
-import { AuthContext } from "../../context/auth/AuthProvider";
-import { CredentialsType } from "../../context/auth/AuthTypes";
-import AuthContent from "../../components/auth/AuthContent";
-import { ScreenStyle } from "../../constants/styles";
-import LoadingOverlay from "../LoadingOverlay";
+import { AuthContext } from '../../context/auth/AuthProvider'
+import { CredentialsType } from '../../context/auth/AuthTypes'
+import AuthContent from '../../components/auth/AuthContent'
+import { ScreenStyle } from '../../constants/styles'
+import LoadingOverlay from '../LoadingOverlay'
 
 export default function ProfileScreen() {
-	const [isAuthenticating, setIsAuthenticating] = useState(false);
-	const { update } = useContext(AuthContext);
+	const [isAuthenticating, setIsAuthenticating] = useState(false)
+	const { update } = useContext(AuthContext)
 
 	async function updateProfileHandler(
 		displayName: string,
 	) {
-		setIsAuthenticating(true);
-		await update({ displayName});
-		setIsAuthenticating(false);
+		setIsAuthenticating(true)
+		await update({ displayName})
+		setIsAuthenticating(false)
 	}
 
 	if (isAuthenticating) {
-		return <LoadingOverlay message="Updating details" />;
+		return <LoadingOverlay message="Updating details" />
 	}
 
 	return (
@@ -28,7 +28,7 @@ export default function ProfileScreen() {
 			<AuthContent
 				authScreenType="update"
 				onSubmit={(credentials: CredentialsType) => {
-					updateProfileHandler(credentials.displayName);
+					updateProfileHandler(credentials.displayName)
 				}}
 				credentialsInvalid={{
 					email: false,
@@ -38,5 +38,5 @@ export default function ProfileScreen() {
 				}}
 			></AuthContent>
 		</View>
-	);
+	)
 }

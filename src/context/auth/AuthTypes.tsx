@@ -1,5 +1,6 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AuthStackParamList } from "../navigation/NavigationTypes";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AuthStackParamList } from '../navigation/NavigationTypes'
+import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
 export type CredentialsInvalidType = {
     email: boolean;
@@ -8,7 +9,7 @@ export type CredentialsInvalidType = {
     confirmPassword: boolean;
   };
 
-  export type CredentialsType = {
+export type CredentialsType = {
     email: string;
     confirmEmail: string;
     password: string;
@@ -17,17 +18,18 @@ export type CredentialsInvalidType = {
   };
 
 export type AuthProps = {
-    authScreenType: "login" | "signUp" | "update";
+    authScreenType: 'login' | 'signUp' | 'update';
     onSubmit: (credentials: CredentialsType) => void;
     credentialsInvalid: CredentialsInvalidType;
     
   };
 
- export type authScreenProp = NativeStackNavigationProp<AuthStackParamList, 'Login', 'SignUp'>
+export type authScreenProp = NativeStackNavigationProp<AuthStackParamList, 'Login', 'SignUp'>
+
 
 export interface AuthContextType {
 	user: null | any;
-	setUser: React.Dispatch<React.SetStateAction<any>>;
+	setUser: React.Dispatch<React.SetStateAction<FirebaseAuthTypes.User>>;
 	login: (props: { email: string; password: string }) => Promise<void>;
 	register: (props: { email: string; password: string }) => Promise<void>;
 	logout: () => Promise<void>;
@@ -41,4 +43,4 @@ export const defaultAuthContext: AuthContextType = {
 	register: async () => {},
 	logout: async () => {},
 	update: async () => {},
-};
+}

@@ -1,5 +1,5 @@
-import { Text } from "react-native";
-import { userDetailHit } from "../../../constants/algoliaHit/algoliaHitTypes";
+import { Text } from 'react-native'
+import { userDetailHit } from '../../../constants/algoliaHit/algoliaHitTypes'
 
 interface HitProps {
     hit: userDetailHit;
@@ -8,9 +8,9 @@ interface HitProps {
 
 
 export function DisplayNameHitElement({ hit }: HitProps) {
-    return (
-      <Text>
-        {hit.displayName}
-      </Text>
-    );
-  }
+	return (
+		<Text>
+			{hit.displayName}
+		</Text>
+	)
+}

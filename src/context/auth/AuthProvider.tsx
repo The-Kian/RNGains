@@ -1,20 +1,20 @@
-import { useState, createContext, useEffect } from "react";
-import { Alert } from "react-native";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import { ProviderProps } from "../../constants/genericTypes";
-import { AuthContextType, defaultAuthContext } from "./AuthTypes";
+import { useState, createContext, useEffect } from 'react'
+import { Alert } from 'react-native'
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import { ProviderProps } from '../../constants/genericTypes'
+import { AuthContextType, defaultAuthContext } from './AuthTypes'
 
-export const AuthContext = createContext(defaultAuthContext);
+export const AuthContext = createContext(defaultAuthContext)
 
 export function AuthProvider({ children }: ProviderProps): JSX.Element {
-	const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+	const [user, setUser] = useState<any | null>(null)
 
 	useEffect(() => {
 		auth().onAuthStateChanged((userState) => {
-			setUser(userState);
-		});
-	}, []);
+			setUser(userState)
+		})
+	}, [])
 
 	const login = async ({
 		email,
@@ -24,13 +24,13 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 		password: string;
 	}) => {
 		try {
-			await auth().signInWithEmailAndPassword(email, password);
+			await auth().signInWithEmailAndPassword(email, password)
 		} catch (error) {
-			if (error.code === "auth/user-not-found") {
-				Alert.alert("User not found");
+			if (error.code === 'auth/user-not-found') {
+				Alert.alert('User not found')
 			}
 		}
-	};
+	}
 
 	const register = async ({
 		email,
@@ -43,39 +43,39 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 			const userCredential = await auth().createUserWithEmailAndPassword(
 				email,
 				password
-			);
-			const user = userCredential.user;
+			)
+			const user = userCredential.user
 
 			await firestore()
-				.collection("users")
+				.collection('users')
 				.doc(user?.uid)
 				.set({
 					displayName: user?.displayName ?? email,
 					email: email,
-				});
+				})
 		} catch (error) {
-			if (error.code === "auth/email-already-in-use") {
-				Alert.alert("That email address is already in use!");
+			if (error.code === 'auth/email-already-in-use') {
+				Alert.alert('That email address is already in use!')
 			}
-			if (error.code === "auth/invalid-email") {
-				Alert.alert("That email address is invalid!");
+			if (error.code === 'auth/invalid-email') {
+				Alert.alert('That email address is invalid!')
 			}
 		}
-	};
+	}
 
 	const update = async ({ displayName }: { displayName: string }) => {
-		const user = auth().currentUser;
+		const user = auth().currentUser
 		if (user) {
 			try {
 				await user.updateProfile({
 					displayName: displayName,
-				});
+				})
 			} catch (error) {
-				Alert.alert(error);
+				Alert.alert(error)
 			}
 			try {
 				await firestore()
-					.collection("users")
+					.collection('users')
 					.doc(user.uid)
 					.set(
 						{
@@ -83,22 +83,22 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 							email: user.email,
 						},
 						{ merge: true }
-					);
+					)
 			} catch (error) {
-				console.log(error.code);
+				console.log(error.code)
 			} finally {
-				setUser(auth().currentUser);
+				setUser(auth().currentUser)
 			}
 		}
-	};
+	}
 
 	const logout = async () => {
 		try {
-			await auth().signOut();
+			await auth().signOut()
 		} catch (error) {
-			Alert.alert(error);
+			Alert.alert(error)
 		}
-	};
+	}
 
 	const value: AuthContextType = {
 		user,
@@ -107,7 +107,7 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 		register,
 		logout,
 		update,
-	};
+	}
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
