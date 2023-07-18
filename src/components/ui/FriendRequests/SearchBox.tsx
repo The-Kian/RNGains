@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { View, TextInput } from "react-native";
 import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks";
 import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 
@@ -9,12 +9,11 @@ export function SearchBox({
 }: UseSearchBoxProps & { onQueryChange: (query: string) => void }) {
 	const { query, refine } = useSearchBox(props);
 	const [inputValue, setInputValue] = useState(query);
-	const [isInputFocused, setIsInputFocused] = useState(false);
 	const inputRef = useRef(null);
 
-  useEffect(() => {
-    onQueryChange(inputValue)
-  }, [inputValue])
+	useEffect(() => {
+		onQueryChange(inputValue);
+	}, [inputValue]);
 
 	function setQuery(newQuery: string) {
 		setInputValue(newQuery);
@@ -26,9 +25,7 @@ export function SearchBox({
 	// We bypass the state update if the input is focused to avoid concurrent
 	// updates when typing.
 	useEffect(() => {
-		if (query !== inputValue && !isInputFocused) {
-			setInputValue(query);
-		}
+		setInputValue(query);
 	}, [query]);
 
 	return (

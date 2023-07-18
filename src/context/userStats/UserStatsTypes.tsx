@@ -1,5 +1,5 @@
 
-import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 
 export interface Lift {
 	id: string,
@@ -10,15 +10,14 @@ export interface Lift {
 	timestamp: FirebaseFirestoreTypes.Timestamp
   }
 
-  export type liftStatsType = {
+export type liftStatsType = {
 	userID: string,
 	userWeight: number
 	squatWeight: number,
 	deadliftWeight: number,
 	benchWeight: number,
   }
-  
-  export type LiftsFormProps = {};
+
 
 export interface UserStatsContextType {
 	uploadStats: (stats: liftStatsType) => Promise<void>;
@@ -36,4 +35,4 @@ export const defaultUserStatsContext: UserStatsContextType = {
 	fetchAllLifts:async () => {},
 	allLifts: null,
 	liftsAdded: 0
-};
+}

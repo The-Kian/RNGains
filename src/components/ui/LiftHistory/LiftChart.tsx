@@ -8,48 +8,47 @@ import { Colors } from "../../../constants/colors";
 
 export interface GraphProps {
 	lifts: Lift[];
-	chartType: string
+	chartType: string;
 }
 
 export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		if (lifts.length >0) {
+		if (lifts.length > 0) {
 			setLoading(false)
 		}
 	}, [lifts])
 
 	if (loading) {
-		return <LoadingOverlay message="Fetching lifts"/>
+		return <LoadingOverlay message="Fetching lifts" />
 	}
 
 	const liftWeightKey = `${chartType}Weight` as keyof Lift
-	const liftData = lifts.map((lift) => lift[liftWeightKey] as number);
+	const liftData = lifts.map((lift) => lift[liftWeightKey] as number)
 
 	const labels = lifts.map((lift) => {
 		const date = lift.timestamp.toDate(); // Converts Firestore Timestamp to JavaScript Date
 		const dateString = `${date.getDate()}/${date.getMonth()}`
 		return dateString
-	  });
+	})
 
 	const line = {
-		labels: labels.slice(0,6).reverse(),
+		labels: labels.slice(0, 6).reverse(),
 		datasets: [
 			{
-				data: liftData.slice(0,6).reverse(),
+				data: liftData.slice(0, 6).reverse(),
 				strokeWidth: 2,
 			},
 		],
-	};
+	}
 
 	return (
-		
 		<View style={ScreenStyle.chartContainer}>
 			<Text> {chartType} </Text>
 			<LineChart
 				data={line}
-				width={Dimensions.get("window").width/1.3} // from react-native
+				width={Dimensions.get('window').width / 1.3} // from react-native
 				height={400}
 				yAxisLabel=""
 				yAxisSuffix="kg"
@@ -65,9 +64,9 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 						borderRadius: 16,
 					},
 					propsForDots: {
-						r: "6",
-						strokeWidth: "2",
-						stroke: "#ffa726",
+						r: '6',
+						strokeWidth: '2',
+						stroke: '#ffa726',
 					},
 				}}
 				bezier
@@ -77,6 +76,5 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 				}}
 			/>
 		</View>
-	);
-};
-
+	)
+}
