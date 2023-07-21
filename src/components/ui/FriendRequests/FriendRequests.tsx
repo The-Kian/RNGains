@@ -1,13 +1,12 @@
 import {  View, Text} from 'react-native';
-import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 import { Button } from 'react-native';
-import { acceptFriendRequest } from '../../friends/FriendRequest';
+import { respondToFriendRequest } from '../../friends/FriendRequest';
 
 export function FriendRequests() {
 	return (
 		<View>
 			<Text>FriendRequest from </Text>
-			<Button title="Accept" onPress={() => {acceptFriendRequest}}/>
+			<Button title="Accept" onPress={() => {respondToFriendRequest}}/>
 		</View>
 	)
 }

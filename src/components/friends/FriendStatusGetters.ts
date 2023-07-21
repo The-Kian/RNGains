@@ -1,6 +1,4 @@
-import firestore, {
-	FirebaseFirestoreTypes,
-} from "@react-native-firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 
 const getFriendDetails = async (friendsRequests: string[]) => {
 	const friendDetails = await Promise.all(
@@ -23,7 +21,8 @@ export const getFriendRequests = async (userID: string) => {
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
-	const query = userFriendsRef.where("status", "==", "accepted");
+	const query = userFriendsRef.where("status", "==", "received");
+	console.log(`KP: getFriendRequests -> query`);
 	const querySnapshot = await query.get();
 
 	const friendRequests: string[] = [];
@@ -41,10 +40,9 @@ export const getCurrentFriends = async (userID: string) => {
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
-	const query = userFriendsRef.where("status", "==", "received");
+	const query = userFriendsRef.where("status", "==", "accepted");
 	const querySnapshot = await query.get();
-
-	const currentFriends: string[] = [];
+	const currentFriends: string[] = []
 
 	querySnapshot.forEach((doc) => {
 		const friendID = doc.data().friendID;
@@ -53,3 +51,21 @@ export const getCurrentFriends = async (userID: string) => {
 
 	return getFriendDetails(currentFriends);
 };
+
+export const getDeniedFriends = async (userID: string) => {
+	const userFriendsRef = firestore()
+		.collection("users")
+		.doc(userID)
+		.collection("friends");
+	const query = userFriendsRef.where("status", "==", "denied");
+	const querySnapshot = await query.get();
+
+	const deniedFriends: string[] = [];
+
+	querySnapshot.forEach((doc) => {
+		const friendID = doc.data().friendID;
+		deniedFriends.push(friendID);
+	});
+
+	return getFriendDetails(deniedFriends);
+}

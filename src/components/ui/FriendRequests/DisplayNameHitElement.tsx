@@ -12,10 +12,6 @@ interface HitProps {
 
 export function DisplayNameHitElement({ hit }: HitProps) {
 	const { user } = useContext(AuthContext);
-
-	const shouldRenderFriend = hit.objectID !== user.uid;
-
-
 	return (
 		<View>
 			<Text>{hit.displayName}</Text>

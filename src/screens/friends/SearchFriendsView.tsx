@@ -2,21 +2,17 @@ import { Text, View } from "react-native";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
 import {
 	InstantSearch,
-	UseHitsProps,
-	useHits,
 	Configure,
 } from "react-instantsearch-hooks";
 import { SearchBox } from "../../components/ui/FriendRequests/SearchBox";
 import { InfiniteHits } from "../../components/ui/FriendRequests/InfiniteHits";
 import { DisplayNameHitElement } from "../../components/ui/FriendRequests/DisplayNameHitElement";
 import { algoliaClient } from "../../constants/algoliaHit/algolia";
-import { useState, useEffect, useContext } from "react";
+import { useState,  useContext } from "react";
 import { AuthContext } from "../../context/auth/AuthProvider";
 
 export default function SearchFriendsView() {
 	const [query, setQuery] = useState("");
-
-	const [searchState, setSearchState] = useState({});
 
 	const { user } = useContext(AuthContext);
 

@@ -2,11 +2,11 @@ import firestore, {
 	FirebaseFirestoreTypes,
 } from "@react-native-firebase/firestore";
 import { Alert } from "react-native";
-import React from "react";
 
 interface friendRequestProps {
 	userID: string;
 	friendID: string;
+	response: string;
 }
 
 interface AddFriendRequestToUserProps {
@@ -64,31 +64,57 @@ export const sendFriendRequest = async ({
 		});
 };
 
-export const acceptFriendRequest = async ({
+export const respondToFriendRequest = async ({
 	userID,
 	friendID,
+	response,
 }: friendRequestProps) => {
 	const batch = firestore().batch();
-	addFriendRequestToUser({
-		batch,
-		userID,
-		friendID,
-		status: "accepted",
-	});
+	if (response === "remove") {
+		console.log('remove')
+		const userFriendsRef = firestore()
+			.collection("users")
+			.doc(userID)
+			.collection("friends")
+			.doc(friendID);
+		const friendFriendsRef = firestore()
+			.collection("users")
+			.doc(friendID)
+			.collection("friends")
+			.doc(userID);
+		batch.delete(userFriendsRef);
+		batch.delete(friendFriendsRef);
 
-	addFriendRequestToUser({
-		batch,
-		userID: friendID,
-		friendID: userID,
-		status: "accepted",
-	});
-
-	return batch
-		.commit()
-		.then(() => {
-			Alert.alert("Friend request accepted");
-		})
-		.catch((error) => {
-			Alert.alert(error.message);
+		return batch
+			.commit()
+			.then(() => {
+				Alert.alert("Friend removed");
+			})
+			.catch((error) => {
+				Alert.alert(error.message);
+			});
+	} else {
+		addFriendRequestToUser({
+			batch,
+			userID,
+			friendID,
+			status: response,
 		});
-}
+
+		addFriendRequestToUser({
+			batch,
+			userID: friendID,
+			friendID: userID,
+			status: response,
+		});
+
+		return batch
+			.commit()
+			.then(() => {
+				Alert.alert("Friend request accepted");
+			})
+			.catch((error) => {
+				Alert.alert(error.message);
+			});
+	}
+};
