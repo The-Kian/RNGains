@@ -10,6 +10,7 @@ import { respondToFriendRequest } from "../../components/friends/FriendRequest";
 import { contentStyle } from "../../constants/styles/contentStyles";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
 
+
 export const FriendRequestFeed = () => {
 	const { user } = useContext(AuthContext);
 	const [friendRequests, setFriendRequests] = useState<
@@ -23,15 +24,19 @@ export const FriendRequestFeed = () => {
 	>([]);
 
 	const userID = user.uid;
-
-	const fetchFriends = async () => {
-		console.log(`KP - fetchFriends running`)
-		const friendRequests = await getFriendRequests(userID);
-		const currentFriends = await getCurrentFriends(userID);
-		const deniedFriends = await getDeniedFriends(userID);
-		setFriendRequests(friendRequests);
-		setCurrentFriends(currentFriends);
-		setDeniedFriends(deniedFriends);
+	const fetchFriends = () => {
+	
+		// Set up listeners for each type of friend request:
+		const unsubscribeFriendRequests = getFriendRequests(userID, setFriendRequests);
+		const unsubscribeCurrentFriends = getCurrentFriends(userID, setCurrentFriends);
+		const unsubscribeDeniedFriends = getDeniedFriends(userID, setDeniedFriends);
+	
+		// Return a cleanup function that removes all the listeners:
+		return async () => {
+			(await unsubscribeFriendRequests)();
+			(await unsubscribeCurrentFriends)();
+			(await unsubscribeDeniedFriends)();
+		};
 	};
 
 	const friendRequestResponseHandler = async (
@@ -44,7 +49,10 @@ export const FriendRequestFeed = () => {
 	};
 
 	useEffect(() => {
-		fetchFriends();
+		const unsubscribe = fetchFriends();
+		return () => {
+			unsubscribe();
+		}
 	}, []);
 
 	return (

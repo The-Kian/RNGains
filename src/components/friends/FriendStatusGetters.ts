@@ -10,62 +10,80 @@ const getFriendDetails = async (friendsRequests: string[]) => {
 				id: friendID,
 				displayName: friendData?.displayName,
 			};
-		})
+		}),
 	);
 
 	return friendDetails;
 };
 
-export const getFriendRequests = async (userID: string) => {
+export const getFriendRequests = async (
+	userID: string,
+	setFriendRequests: (
+		requests: { id: string; displayName: string; }[],
+	) => void,
+) => {
 	const userFriendsRef = firestore()
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
 	const query = userFriendsRef.where("status", "==", "received");
-	console.log(`KP: getFriendRequests -> query`);
-	const querySnapshot = await query.get();
 
-	const friendRequests: string[] = [];
+	return query.onSnapshot(async (querySnapshot) => {
+		const friendRequests: string[] = [];
 
-	querySnapshot.forEach((doc) => {
-		const friendID = doc.data().friendID;
-		friendRequests.push(friendID);
+		querySnapshot.forEach((doc) => {
+			const friendID = doc.data().friendID;
+			friendRequests.push(friendID);
+		});
+		const friendDetails = await getFriendDetails(friendRequests);
+		setFriendRequests(friendDetails);
 	});
-
-	return getFriendDetails(friendRequests);
 };
 
-export const getCurrentFriends = async (userID: string) => {
+export const getCurrentFriends = async (
+	userID: string,
+	setCurrentFriends: (
+		requests: { id: string; displayName: string;}[],
+	) => void,
+) => {
 	const userFriendsRef = firestore()
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
 	const query = userFriendsRef.where("status", "==", "accepted");
-	const querySnapshot = await query.get();
-	const currentFriends: string[] = []
 
-	querySnapshot.forEach((doc) => {
-		const friendID = doc.data().friendID;
-		currentFriends.push(friendID);
+	return query.onSnapshot(async (querySnapshot) => {
+		const currentFriends: string[] = [];
+
+		querySnapshot.forEach((doc) => {
+			const friendID = doc.data().friendID;
+			currentFriends.push(friendID);
+		});
+		const friendDetails = await getFriendDetails(currentFriends);
+		setCurrentFriends(friendDetails);
 	});
-
-	return getFriendDetails(currentFriends);
 };
 
-export const getDeniedFriends = async (userID: string) => {
+export const getDeniedFriends = async (
+	userID: string,
+	setDeniedFriends: (
+		requests: { id: string; displayName: string;}[],
+	) => void,
+) => {
 	const userFriendsRef = firestore()
 		.collection("users")
 		.doc(userID)
 		.collection("friends");
 	const query = userFriendsRef.where("status", "==", "denied");
-	const querySnapshot = await query.get();
 
-	const deniedFriends: string[] = [];
+	return query.onSnapshot(async (querySnapshot) => {
+		const deniedFriends: string[] = [];
 
-	querySnapshot.forEach((doc) => {
-		const friendID = doc.data().friendID;
-		deniedFriends.push(friendID);
+		querySnapshot.forEach((doc) => {
+			const friendID = doc.data().friendID;
+			deniedFriends.push(friendID);
+		});
+		const friendDetails = await getFriendDetails(deniedFriends);
+		setDeniedFriends(friendDetails);
 	});
-
-	return getFriendDetails(deniedFriends);
-}
+};
