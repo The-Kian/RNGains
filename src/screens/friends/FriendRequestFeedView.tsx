@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/auth/AuthProvider";
 import {
 	getCurrentFriends,
 	getDeniedFriends,
-	getFriendRequests,
+	getReceivedFriendRequests,
 } from "../../components/friends/FriendStatusGetters";
 import { respondToFriendRequest } from "../../components/friends/FriendRequest";
 import { contentStyle } from "../../constants/styles/contentStyles";
@@ -27,7 +27,7 @@ export const FriendRequestFeed = () => {
 	const fetchFriends = () => {
 	
 		// Set up listeners for each type of friend request:
-		const unsubscribeFriendRequests = getFriendRequests(userID, setFriendRequests);
+		const unsubscribeFriendRequests = getReceivedFriendRequests(userID, setFriendRequests);
 		const unsubscribeCurrentFriends = getCurrentFriends(userID, setCurrentFriends);
 		const unsubscribeDeniedFriends = getDeniedFriends(userID, setDeniedFriends);
 	

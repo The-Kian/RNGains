@@ -16,7 +16,29 @@ const getFriendDetails = async (friendsRequests: string[]) => {
 	return friendDetails;
 };
 
-export const getFriendRequests = async (
+export const getAllFriends = async (
+	userID: string,
+	setAllFriends: (
+		friends : { id: string; displayName: string; }[],
+	) => void,
+) => {
+	const userFriendsRef = firestore()
+		.collection("users")
+		.doc(userID)
+		.collection("friends");
+	return userFriendsRef.onSnapshot(async (querySnapshot) => {
+		const friends: string[] = [];
+
+		querySnapshot.forEach((doc) => {
+			const friendID = doc.data().friendID;
+			friends.push(friendID);
+		});
+		const friendDetails = await getFriendDetails(friends);
+		setAllFriends(friendDetails);
+	});
+};
+
+export const getReceivedFriendRequests = async (
 	userID: string,
 	setFriendRequests: (
 		requests: { id: string; displayName: string; }[],
