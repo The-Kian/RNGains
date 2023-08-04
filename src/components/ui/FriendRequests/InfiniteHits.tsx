@@ -7,9 +7,9 @@ type InfiniteHitsProps<THit> = UseInfiniteHitsProps & {
   hitComponent: (props: {hit: THit}) => JSX.Element;
 }
 
-export function InfiniteHits<THit>({ hitComponent: Hit, hide, ...props }: InfiniteHitsProps<THit> & {hide: boolean}) {
+export function InfiniteHits<THit>({ hitComponent: Hit, hide, friendFilters, ...props }: InfiniteHitsProps<THit> & {hide: boolean, friendFilters: string[]}) {
 	const { hits, isLastPage, showMore } = useInfiniteHits(props);
-
+	
 	if (hide) {
 		return null;
 	}
@@ -24,12 +24,20 @@ export function InfiniteHits<THit>({ hitComponent: Hit, hide, ...props }: Infini
 					showMore();
 				}
 			}}
-			renderItem={({ item }) => (
-				<View style={algoliaStyles.item}>
-					<Hit hit={item as THit}/>
-				</View>
-			)}
+
+			renderItem={({ item }) => {
+				const isCurrentFriend = friendFilters.some(friendID => friendID === item.objectID);
+				
+				if (isCurrentFriend) {
+					return null;
+				}
+				return (
+					<View style={algoliaStyles.item}>
+						<Hit hit={item as THit}/>
+					</View>
+				)
+			}}
 		/>
 	);
-};
+}; 
 

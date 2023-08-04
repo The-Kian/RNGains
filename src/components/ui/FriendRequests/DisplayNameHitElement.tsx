@@ -12,13 +12,16 @@ interface HitProps {
 
 export function DisplayNameHitElement({ hit }: HitProps) {
 	const { user } = useContext(AuthContext);
+	const userID: string = user.uid;
+
+
 	return (
 		<View>
 			<Text>{hit.displayName}</Text>
 			<Button
 				title="Add Friend"
 				onPress={() =>
-					sendFriendRequest({ userID: user.uid, friendID: hit.objectID })
+					sendFriendRequest({ userID: userID, friendID: hit.objectID, response: "" })
 				}
 			/>
 		</View>

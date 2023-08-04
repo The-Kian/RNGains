@@ -30,11 +30,12 @@ export default function SearchFriendsView() {
 		};
 	};
 
-	const friendFilters = allFriends.map((friend) => `NOT displayName:${friend.displayName}`);
-	const filterString = friendFilters.join(" ");
+	const friendFilters = allFriends.map((friend) => `${friend.id}`);
 
+	console.log("🚀 ~ file: SearchFriendsView.tsx:35 ~ SearchFriendsView ~ friendFilters:", friendFilters)
 	useEffect(() => {
 		const unsubscribe = fetchFriends();
+		
 		return () => {
 			unsubscribe();
 		}
@@ -43,12 +44,13 @@ export default function SearchFriendsView() {
 	return (
 		<View style={ScreenStyle.rootContainer}>
 			<InstantSearch searchClient={algoliaClient} indexName="dev_RNGains">
-				<Configure filters={`NOT displayName:${userDisplayName} AND ${filterString}`} />
+				<Configure filters={`NOT displayName:${userDisplayName}`} />
 				<Text>Search</Text>
 				<SearchBox onQueryChange={setQuery} />
 				<InfiniteHits
 					hitComponent={DisplayNameHitElement}
 					hide={query.trim() === ""}
+					friendFilters={friendFilters}
 				/>
 			</InstantSearch>
 		</View>
