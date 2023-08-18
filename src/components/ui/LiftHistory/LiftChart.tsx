@@ -1,11 +1,10 @@
-import { Dimensions, Text, View } from 'react-native'
-import { LineChart } from 'react-native-chart-kit'
-import { ScreenStyle } from '../../../constants/styles'
-
-import { useEffect, useState } from 'react'
-import LoadingOverlay from '../../../screens/LoadingOverlay'
-import { Colors } from '../../../constants/colors'
-import { Lift } from '../../../context/userStats/UserStatsTypes'
+import { Dimensions, Text, View } from "react-native";
+import { LineChart } from "react-native-chart-kit";
+import { ScreenStyle } from "../../../constants/styles/screenStyles";
+import { Lift } from "../../../context/userStats/UserStatsTypes";
+import { useEffect, useState } from "react";
+import LoadingOverlay from "../../../screens/LoadingOverlay";
+import { Colors } from "../../../constants/colors";
 
 export interface GraphProps {
 	lifts: Lift[];
@@ -29,7 +28,7 @@ export const LiftChart = ({ lifts, chartType }: GraphProps) => {
 	const liftData = lifts.map((lift) => lift[liftWeightKey] as number)
 
 	const labels = lifts.map((lift) => {
-		const date = lift.timestamp.toDate() // Converts Firestore Timestamp to JavaScript Date
+		const date = lift.timestamp.toDate(); // Converts Firestore Timestamp to JavaScript Date
 		const dateString = `${date.getDate()}/${date.getMonth()}`
 		return dateString
 	})

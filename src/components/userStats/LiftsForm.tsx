@@ -4,7 +4,8 @@ import Input from '../ui/Input'
 import Button from '../ui/Button'
 import { AuthContext } from '../../context/auth/AuthProvider'
 import { UserStatsContext } from '../../context/userStats/UserStatsProvider'
-import { ScreenStyle } from '../../constants/styles'
+
+import { contentStyle } from '../../constants/styles/contentStyles'
 
 export const LiftsForm = () => {
 	const { user } = useContext(AuthContext)
@@ -53,7 +54,7 @@ export const LiftsForm = () => {
 	}
 
 	return (
-		<View style={ScreenStyle.updateLiftsContent}>
+		<View style={contentStyle.updateLiftsContent}>
 			<Input
 				label="Weight (kg)"
 				keyboardType="number-pad"

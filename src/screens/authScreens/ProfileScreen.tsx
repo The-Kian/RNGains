@@ -1,11 +1,11 @@
 import { View } from 'react-native'
 import { useContext, useState } from 'react'
 
-import { AuthContext } from '../../context/auth/AuthProvider'
-import { CredentialsType } from '../../context/auth/AuthTypes'
-import AuthContent from '../../components/auth/AuthContent'
-import { ScreenStyle } from '../../constants/styles'
-import LoadingOverlay from '../LoadingOverlay'
+import { AuthContext } from "../../context/auth/AuthProvider";
+import { CredentialsType } from "../../context/auth/AuthTypes";
+import AuthContent from "../../components/auth/AuthContent";
+import { ScreenStyle } from "../../constants/styles/screenStyles";
+import LoadingOverlay from "../LoadingOverlay";
 
 export default function ProfileScreen() {
 	const [isAuthenticating, setIsAuthenticating] = useState(false)

@@ -1,14 +1,14 @@
 
 
-import { useContext } from 'react'
-import { Text, View } from 'react-native'
+import { useContext } from 'react';
+import { Text, View } from 'react-native';
 
-import { AuthContext } from '../context/auth/AuthProvider'
-import { ScreenStyle } from '../constants/styles'
+import { AuthContext } from '../context/auth/AuthProvider';
+import { ScreenStyle } from '../constants/styles/screenStyles';
 
 function HomeScreen() {
 
-	const {user} = useContext(AuthContext)
+	const {user} = useContext(AuthContext);
 
 	return (
 		<View style={ScreenStyle.rootContainer}>
@@ -16,7 +16,7 @@ function HomeScreen() {
 			<Text style={ScreenStyle.welcomeText} >Logged in {user.displayName} </Text>
 
 		</View>
-	)
+	);
 }
 
-export default HomeScreen
+export default HomeScreen;

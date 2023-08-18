@@ -1,5 +1,5 @@
-import { View, Text, TextInput, KeyboardTypeOptions } from 'react-native'
-import {inputStyles} from '../../constants/styles'
+import { View, Text, TextInput, KeyboardTypeOptions } from 'react-native';
+import { inputStyles } from "../../constants/styles/inputStyles";
 
 function Input(props: {
   label: string,

@@ -1,8 +1,8 @@
 
-import { ReactNode } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { ReactNode } from 'react';
+import { Pressable, Text, View } from 'react-native';
 
-import { buttonStyles } from '../../constants/styles'
+import { buttonStyles } from "../../constants/styles/buttonStyles";
 
 function FlatButton(props: { children: ReactNode, onPress: () => void }) {
 	return (
@@ -14,7 +14,7 @@ function FlatButton(props: { children: ReactNode, onPress: () => void }) {
 				<Text style={buttonStyles.buttonText}>{props.children}</Text>
 			</View>
 		</Pressable>
-	)
+	);
 }
 
-export default FlatButton
+export default FlatButton;

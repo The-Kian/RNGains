@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { ReactNode } from 'react';
+import { Pressable, Text, View } from 'react-native';
 
-import { buttonStyles } from '../../constants/styles'
+import { buttonStyles } from "../../constants/styles/buttonStyles";
 
 function Button(props:{ children: ReactNode, onPress: () => void }) {
 	return (
@@ -13,8 +13,8 @@ function Button(props:{ children: ReactNode, onPress: () => void }) {
 				<Text style={buttonStyles.buttonText}>{props.children}</Text>
 			</View>
 		</Pressable>
-	)
+	);
 }
 
-export default Button
+export default Button;
 

@@ -3796,6 +3796,7 @@ __metadata:
     flow-bin: ^0.203.1
     prettier: ^3.0.0
     react: 18.2.0
+    react-instantsearch-core: ^6.40.1
     react-instantsearch-hooks: ^6.45.0
     react-native: 0.71.8
     react-native-chart-kit: ^6.12.0
@@ -10808,7 +10809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:*, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:*, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -10989,12 +10990,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-fast-compare@npm:^3.0.0":
+  version: 3.2.2
+  resolution: "react-fast-compare@npm:3.2.2"
+  checksum: 2071415b4f76a3e6b55c84611c4d24dcb12ffc85811a2840b5a3f1ff2d1a99be1020d9437ee7c6e024c9f4cbb84ceb35e48cf84f28fcb00265ad2dfdd3947704
+  languageName: node
+  linkType: hard
+
 "react-freeze@npm:^1.0.0":
   version: 1.0.3
   resolution: "react-freeze@npm:1.0.3"
   peerDependencies:
     react: ">=17.0.0"
   checksum: 4258eabdbbf74aaebc38ad1fd7cfdc1984d2a844a2247b39a341c55c1beb02d5e855e6473ec5683205a52b2251d0f7dffa07cd8100f402dd2698af88b932d946
+  languageName: node
+  linkType: hard
+
+"react-instantsearch-core@npm:^6.40.1":
+  version: 6.40.2
+  resolution: "react-instantsearch-core@npm:6.40.2"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+    algoliasearch-helper: 3.13.4
+    prop-types: ^15.6.2
+    react-fast-compare: ^3.0.0
+  peerDependencies:
+    algoliasearch: ">= 3.1 < 5"
+    react: ">= 16.3.0 < 19"
+  checksum: d24a8a2d975977c5f67f269e16ba6012c752f29ecf194c84b7aaa305ccb3a4718044defeb9d685f2077755f7ecdc08d872b7aa57787027ea3ada3dc3bd0e768e
   languageName: node
   linkType: hard
 

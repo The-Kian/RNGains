@@ -1,27 +1,27 @@
 
-import { useContext } from 'react'
-import React from 'react'
-import { Text, View } from 'react-native'
+import { useContext } from "react";
+import React from "react";
+import { Text, View } from "react-native";
 
 
-import LiftCarousel from '../../components/ui/LiftCarousel'
+import LiftCarousel from "../../components/ui/LiftCarousel";
 
-import { ScreenStyle } from '../../constants/styles'
-import { LiftChart } from '../../components/ui/LiftHistory/LiftChart'
-import { useFocusEffect } from '@react-navigation/native'
-import { UserStatsContext } from '../../context/userStats/UserStatsProvider'
-import { AuthContext } from '../../context/auth/AuthProvider'
+import { ScreenStyle } from "../../constants/styles/screenStyles";
+import { LiftChart } from "../../components/ui/LiftHistory/LiftChart";
+import { useFocusEffect } from "@react-navigation/native";
+import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
 
 
 function LiftGraphScreen() {
-	const { fetchAllLifts, allLifts} = useContext(UserStatsContext)
-	const { user } = useContext(AuthContext)
+	const { fetchAllLifts, allLifts} = useContext(UserStatsContext);
+	const { user } = useContext(AuthContext);
 
 	useFocusEffect(
 		React.useCallback(() => {
-			fetchAllLifts(user.uid)
+			fetchAllLifts(user.uid);
 		}, [user.uid])
-	)
+	);
 
 	return (
 		<View style={ScreenStyle.rootContainer}>
@@ -37,7 +37,7 @@ function LiftGraphScreen() {
 				)}
 			</LiftCarousel>
 		</View>
-	)
+	);
 }
 
-export default LiftGraphScreen
+export default LiftGraphScreen;

@@ -1,5 +1,5 @@
-import { ActivityIndicator, Text, View } from 'react-native'
-import { ScreenStyle } from '../constants/styles'
+import { ActivityIndicator, Text, View } from 'react-native';
+import { ScreenStyle } from '../constants/styles/screenStyles';
 
 function LoadingOverlay(props: { message: string }) {
 	return (
@@ -7,9 +7,9 @@ function LoadingOverlay(props: { message: string }) {
 			<Text style={ScreenStyle.loadingMessage}>{props.message}</Text>
 			<ActivityIndicator size="large" />
 		</View>
-	)
+	);
 }
 
-export default LoadingOverlay
+export default LoadingOverlay;
 
 

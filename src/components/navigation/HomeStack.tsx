@@ -7,14 +7,14 @@ import {
 	DrawerContentComponentProps
 } from '@react-navigation/drawer'
 
-import HomeScreen from '../../screens/HomeScreen'
-import { Colors } from '../../constants/colors'
-import FriendsScreen from '../../screens/FriendsScreen'
-import { AuthContext } from '../../context/auth/AuthProvider'
-import ProfileScreen from '../../screens/authScreens/ProfileScreen'
-import UpdateStatsScreen from '../../screens/liftStats/UpdateLiftsScreen'
-import LiftHistoryScreen from '../../screens/liftStats/LiftHistoryScreen'
-import LiftGraphScreen from '../../screens/liftStats/LiftGraphScreen'
+import HomeScreen from "../../screens/HomeScreen";
+import { Colors } from "../../constants/colors";
+import FriendsScreen from "../../screens/friends/FriendsScreen";
+import { AuthContext } from "../../context/auth/AuthProvider";
+import ProfileScreen from "../../screens/authScreens/ProfileScreen";
+import UpdateStatsScreen from "../../screens/liftStats/UpdateLiftsScreen";
+import LiftHistoryScreen from "../../screens/liftStats/LiftHistoryScreen";
+import LiftGraphScreen from "../../screens/liftStats/LiftGraphScreen";
 
 const Drawer = createDrawerNavigator()
 

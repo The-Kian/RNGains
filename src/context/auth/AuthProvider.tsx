@@ -85,7 +85,7 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 						{ merge: true }
 					)
 			} catch (error) {
-				console.log(error.code)
+				Alert.alert(error)
 			} finally {
 				setUser(auth().currentUser)
 			}
