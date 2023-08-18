@@ -71,7 +71,6 @@ export const respondToFriendRequest = async ({
 }: friendRequestProps) => {
 	const batch = firestore().batch();
 	if (response === "remove") {
-		console.log('remove')
 		const userFriendsRef = firestore()
 			.collection("users")
 			.doc(userID)

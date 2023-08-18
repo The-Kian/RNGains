@@ -31,8 +31,6 @@ export default function SearchFriendsView() {
 	};
 
 	const friendFilters = allFriends.map((friend) => `${friend.id}`);
-
-	console.log("🚀 ~ file: SearchFriendsView.tsx:35 ~ SearchFriendsView ~ friendFilters:", friendFilters)
 	useEffect(() => {
 		const unsubscribe = fetchFriends();
 		
