@@ -45,7 +45,6 @@ export const FriendRequestFeed = () => {
 		response: string,
 	) => {
 		respondToFriendRequest({ userID, friendID, response });
-		fetchFriends();
 	};
 
 	useEffect(() => {
