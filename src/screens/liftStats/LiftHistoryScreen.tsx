@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/auth/AuthProvider";
 
 import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
 
-import { liftHistoryList } from "../../components/ui/LiftHistory/LiftHistoryList";
+import { liftsDisplayList } from "../../components/ui/LiftHistory/LiftHistoryList";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
 
 function LiftHistoryScreen() {
@@ -23,7 +23,7 @@ function LiftHistoryScreen() {
 			<FlatList
 				data={allLifts}
 				keyExtractor={(item) => item.id}
-				renderItem={liftHistoryList}
+				renderItem={liftsDisplayList}
 			/>
 		</View>
 		

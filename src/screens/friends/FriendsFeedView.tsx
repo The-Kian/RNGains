@@ -3,18 +3,17 @@ import { FlatList, Text, View } from "react-native";
 import { AuthContext } from "../../context/auth/AuthProvider";
 import { getCurrentFriends } from "../../components/friends/FriendStatusGetters";
 
-import { UserStatsContext } from "../../context/userStats/UserStatsProvider";
-
-import { liftHistoryList } from "../../components/ui/LiftHistory/LiftHistoryList";
+import { liftsDisplayList } from "../../components/ui/LiftHistory/LiftHistoryList";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
+import { fetchFriendsLifts } from "../../components/friends/FriendsFeedQueries";
+import { IFriend, IFriendsLifts } from "../../constants/types/friend";
 
 function FriendsFeedView() {
-	const { fetchAllLifts, allLifts } = useContext(UserStatsContext);
 	const { user } = useContext(AuthContext);
 
-	const [currentFriends, setCurrentFriends] = useState<
-		{ id: string; displayName: string }[]
-	>([]);
+	const [currentFriends, setCurrentFriends] = useState<IFriend[]>([]);
+
+	const [friendsLifts, setFriendsLifts] = useState<IFriendsLifts[]>([]);
 
 	const userID = user.uid;
 
@@ -30,6 +29,11 @@ function FriendsFeedView() {
 
 	useEffect(() => {
 		const unsubscribe = fetchFriends();
+		console.log(
+			"🚀 ~ file: FriendsFeedView.tsx:15 ~ FriendsFeedView ~ currentFriends:",
+			currentFriends,
+		);
+
 		return () => {
 			unsubscribe();
 		};
@@ -37,18 +41,23 @@ function FriendsFeedView() {
 
 	useEffect(() => {
 		if (currentFriends) {
-			fetchAllLifts(currentFriends[0].id);
+			(async () => {
+				const receivedFriendsLifts = await fetchFriendsLifts(currentFriends);
+				setFriendsLifts(receivedFriendsLifts);
+			})();
 		}
-	}, [currentFriends])
+	}, [currentFriends]);
 
 	return (
 		<View style={ScreenStyle.rootContainer}>
 			<Text style={ScreenStyle.title}>Welcome!</Text>
 			<Text style={ScreenStyle.welcomeText}> </Text>
 			<FlatList
-				data={allLifts}
-				keyExtractor={(item) => item.id}
-				renderItem={liftHistoryList}
+				data={friendsLifts}
+				keyExtractor={(item) => item.friend.id}
+				renderItem={(props) =>
+					liftsDisplayList({ ...props, friendID: props.item.friend.id, displayName: props.item.friend.displayName })
+				}
 			/>
 		</View>
 	);
