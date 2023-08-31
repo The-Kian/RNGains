@@ -1,50 +1,25 @@
 import { useContext, useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-import { AuthContext } from "../../context/auth/AuthProvider";
-import { getCurrentFriends } from "../../components/friends/FriendStatusGetters";
-
+import { FlatList, Text, View, Button } from "react-native";
 import { liftsDisplayList } from "../../components/ui/LiftHistory/LiftHistoryList";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
 import { fetchFriendsLifts } from "../../components/friends/FriendsFeedQueries";
-import { IFriend, IFriendsLifts } from "../../constants/types/friend";
+import { IFriendsLifts } from "../../constants/types/friend";
+import { FriendsContext } from "../../context/friends/FriendsProvider";
 
 function FriendsFeedView() {
-	const { user } = useContext(AuthContext);
 
-	const [currentFriends, setCurrentFriends] = useState<IFriend[]>([]);
+	const {currentFriends} = useContext(FriendsContext);
 
 	const [friendsLifts, setFriendsLifts] = useState<IFriendsLifts[]>([]);
 
-	const userID = user.uid;
-
-	const fetchFriends = () => {
-		const unsubscribeCurrentFriends = getCurrentFriends(
-			userID,
-			setCurrentFriends,
-		);
-		return async () => {
-			(await unsubscribeCurrentFriends)();
-		};
+	const fetchAndSetFriendsLifts = async () => {
+		const receivedFriendsLifts = await fetchFriendsLifts(currentFriends);
+		setFriendsLifts(receivedFriendsLifts);
 	};
 
 	useEffect(() => {
-		const unsubscribe = fetchFriends();
-		console.log(
-			"🚀 ~ file: FriendsFeedView.tsx:15 ~ FriendsFeedView ~ currentFriends:",
-			currentFriends,
-		);
-
-		return () => {
-			unsubscribe();
-		};
-	}, []);
-
-	useEffect(() => {
 		if (currentFriends) {
-			(async () => {
-				const receivedFriendsLifts = await fetchFriendsLifts(currentFriends);
-				setFriendsLifts(receivedFriendsLifts);
-			})();
+			fetchAndSetFriendsLifts();
 		}
 	}, [currentFriends]);
 
@@ -59,6 +34,7 @@ function FriendsFeedView() {
 					liftsDisplayList({ ...props, friendID: props.item.friend.id, displayName: props.item.friend.displayName })
 				}
 			/>
+			<Button title="Refresh" onPress={fetchAndSetFriendsLifts} />
 		</View>
 	);
 }

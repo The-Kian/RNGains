@@ -1,43 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
 import { Button, Text, View } from "react-native";
-import { AuthContext } from "../../context/auth/AuthProvider";
-import {
-	getCurrentFriends,
-	getDeniedFriends,
-	getReceivedFriendRequests,
-} from "../../components/friends/FriendStatusGetters";
 import { respondToFriendRequest } from "../../components/friends/FriendRequest";
 import { contentStyle } from "../../constants/styles/contentStyles";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
+import { useContext } from "react";
+import { FriendsContext } from "../../context/friends/FriendsProvider";
+import { AuthContext } from "../../context/auth/AuthProvider";
 
 
 export const FriendRequestFeed = () => {
+
 	const { user } = useContext(AuthContext);
-	const [friendRequests, setFriendRequests] = useState<
-		{ id: string; displayName: string }[]
-	>([]);
-	const [currentFriends, setCurrentFriends] = useState<
-		{ id: string; displayName: string }[]
-	>([]);
-	const [deniedFriends, setDeniedFriends] = useState<
-		{ id: string; displayName: string }[]
-	>([]);
+
+	const { friendRequests, currentFriends, deniedFriends } = useContext(FriendsContext);
 
 	const userID = user.uid;
-	const fetchFriends = () => {
-	
-		// Set up listeners for each type of friend request:
-		const unsubscribeFriendRequests = getReceivedFriendRequests(userID, setFriendRequests);
-		const unsubscribeCurrentFriends = getCurrentFriends(userID, setCurrentFriends);
-		const unsubscribeDeniedFriends = getDeniedFriends(userID, setDeniedFriends);
-	
-		// Return a cleanup function that removes all the listeners:
-		return async () => {
-			(await unsubscribeFriendRequests)();
-			(await unsubscribeCurrentFriends)();
-			(await unsubscribeDeniedFriends)();
-		};
-	};
 
 	const friendRequestResponseHandler = async (
 		userID: string,
@@ -46,14 +22,6 @@ export const FriendRequestFeed = () => {
 	) => {
 		respondToFriendRequest({ userID, friendID, response });
 	};
-
-	useEffect(() => {
-		const unsubscribe = fetchFriends();
-		return () => {
-			unsubscribe();
-		}
-	}, []);
-
 	return (
 		<View style={contentStyle.friendFeedContent}>
 			<View>
