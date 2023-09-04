@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { FlatList, Text, View, Button } from "react-native";
-import { liftsDisplayList } from "../../components/ui/LiftHistory/LiftHistoryList";
+import { LiftDisplayList } from "../../components/ui/LiftFeed/LiftDisplayList";
 import { ScreenStyle } from "../../constants/styles/screenStyles";
 import { fetchFriendsLifts } from "../../components/friends/FriendsFeedQueries";
 import { IFriendsLifts } from "../../constants/types/friend";
@@ -31,7 +31,7 @@ function FriendsFeedView() {
 				data={friendsLifts}
 				keyExtractor={(item) => item.friend.id}
 				renderItem={(props) =>
-					liftsDisplayList({ ...props, friendID: props.item.friend.id, displayName: props.item.friend.displayName })
+					<LiftDisplayList{ ...props} friendID={props.item.friend.id} displayName={props.item.friend.displayName} />
 				}
 			/>
 			<Button title="Refresh" onPress={fetchAndSetFriendsLifts} />
