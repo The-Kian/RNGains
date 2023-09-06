@@ -3,17 +3,22 @@ import firestore from "@react-native-firebase/firestore";
 const getFriendDetails = async (friendsRequests: string[]) => {
 	const friendDetails = await Promise.all(
 		friendsRequests.map(async (friendID: string) => {
-			const friendRef = firestore().collection("users").doc(friendID);
-			const friendDoc = await friendRef.get();
-			const friendData = friendDoc.data();
+			const displayName = await getDisplayName(friendID);
 			return {
 				id: friendID,
-				displayName: friendData?.displayName,
+				displayName,
 			};
 		}),
 	);
 
 	return friendDetails;
+};
+
+export const getDisplayName = async (userID: string) => {
+	const userRef = firestore().collection("users").doc(userID);
+	const userDoc = await userRef.get();
+	const userData = userDoc.data();
+	return userData?.displayName;
 };
 
 export const getAllFriends = async (

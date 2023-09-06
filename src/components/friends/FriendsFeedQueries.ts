@@ -1,8 +1,7 @@
 import firestore from "@react-native-firebase/firestore";
 import { Lift } from "../../context/userStats/UserStatsTypes";
 import { IFriend, IFriendsLifts } from "../../constants/types/friend";
-import { AuthContext } from "../../context/auth/AuthProvider";
-import { useContext } from "react";
+
 
 //TO DO Parallelize this using promise.all()
 export const fetchFriendsLifts = async (
@@ -37,34 +36,37 @@ export const fetchFriendsLifts = async (
 export const giveKudos = async (
 	friendID: string,
 	liftID: string,
+	userID: string,
 ): Promise<void> => {
-	const {user} = useContext(AuthContext);
-	const userID = user?.uid;
-	const docRef = firestore()
-		.collection("users")
-		.doc(friendID)
-		.collection("lifts")
-		.doc(liftID);
+	try {
+		const docRef = firestore()
+			.collection("users")
+			.doc(friendID)
+			.collection("lifts")
+			.doc(liftID);
 
-	const doc = await docRef.get();
-	if (!doc.exists) {
-		console.error("Document does not exist!");
-		return;
+		const doc = await docRef.get();
+		if (!doc.exists) {
+			console.error("Document does not exist!");
+			return;
+		}
+
+		const data = doc.data();
+		const kudosArray = data?.kudos || [];
+
+		// Check if userID already exists in kudos array
+		if (kudosArray.some((entry: any) => entry.userID === userID)) {
+			console.log("Entry with the same userID already exists.");
+			return;
+		}
+
+		await docRef.update({
+			kudos: firestore.FieldValue.arrayUnion({
+				friendID: userID,
+				timestamp: firestore.Timestamp.now(),
+			}),
+		});
+	} catch (error) {
+		console.log("🚀 ~ file: FriendsFeedQueries.ts:72 ~ error:", error);
 	}
-
-	const data = doc.data();
-	const kudosArray = data?.kudos || [];
-
-	// Check if userID already exists in kudos array
-	if (kudosArray.some((entry: any) => entry.userID === userID)) {
-		console.log("Entry with the same userID already exists.");
-		return;
-	}
-
-	await docRef.update({
-		kudos: firestore.FieldValue.arrayUnion({
-			userID,
-			timestamp: firestore.Timestamp.now(),
-		}),
-	});
 };
