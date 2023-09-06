@@ -499,6 +499,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-validator-option@npm:^7.22.15":
+  version: 7.22.15
+  resolution: "@babel/helper-validator-option@npm:7.22.15"
+  checksum: 68da52b1e10002a543161494c4bc0f4d0398c8fdf361d5f7f4272e95c45d5b32d974896d44f6a0ea7378c9204988879d73613ca683e13bd1304e46d25ff67a8d
+  languageName: node
+  linkType: hard
+
 "@babel/helper-validator-option@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/helper-validator-option@npm:7.22.5"
@@ -1723,7 +1730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-flow@npm:^7.13.13, @babel/preset-flow@npm:^7.21.4":
+"@babel/preset-flow@npm:^7.13.13":
   version: 7.22.5
   resolution: "@babel/preset-flow@npm:7.22.5"
   dependencies:
@@ -1733,6 +1740,19 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 0bf6f587e952f8945d348cf0f25cbc3e50697f2cdc4e1394badfb76cfdde0cc2f2c9250bda3d28ecc6c196b89de7c8e72b8ffbf3086e604b959cce352dd2b34e
+  languageName: node
+  linkType: hard
+
+"@babel/preset-flow@npm:^7.22.15":
+  version: 7.22.15
+  resolution: "@babel/preset-flow@npm:7.22.15"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.22.5
+    "@babel/helper-validator-option": ^7.22.15
+    "@babel/plugin-transform-flow-strip-types": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 17f8b80b1012802f983227b423c8823990db9748aec4f8bfd56ff774d8d954e9bdea67377788abac526754b3d307215c063c9beadf5f1b4331b30d4ba0593286
   languageName: node
   linkType: hard
 
@@ -3026,9 +3046,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-firebase/app@npm:^17.4.2":
-  version: 17.5.0
-  resolution: "@react-native-firebase/app@npm:17.5.0"
+"@react-native-firebase/app@npm:^18.3.2":
+  version: 18.3.2
+  resolution: "@react-native-firebase/app@npm:18.3.2"
   dependencies:
     opencollective-postinstall: ^2.0.1
     superstruct: ^0.6.2
@@ -3039,40 +3059,31 @@ __metadata:
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: 7d86f43a063561971edf328f7a2a1928660beb9617cbc3c5ba73ab65f359e0cadbc5e276e5654cfa0ef2d25c29f3f98587ebfd58f193be51f472facff3c3024f
+  checksum: d6be1c1dec448436bbff6f3f7f393044c0622ba5ff5d7274aa257765705c763a45cb4306968d63874eb21436b6ea1bec74264c02a8a6fd7a46f23e7a8c1c60f3
   languageName: node
   linkType: hard
 
-"@react-native-firebase/auth@npm:^17.4.0":
-  version: 17.5.0
-  resolution: "@react-native-firebase/auth@npm:17.5.0"
+"@react-native-firebase/auth@npm:^18.3.2":
+  version: 18.3.2
+  resolution: "@react-native-firebase/auth@npm:18.3.2"
   dependencies:
-    plist: ^3.0.5
+    plist: ^3.1.0
   peerDependencies:
-    "@react-native-firebase/app": 17.5.0
+    "@react-native-firebase/app": 18.3.2
     expo: ">=47.0.0"
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: c519e8847adebaaedccaf70c6a27e78e982a6c0efa6cdefa2a82d0f2cbf8beb6b0e44ad4aebf96f73440f9581b7134a35993340e556fbd624713a0aa82f2fd62
+  checksum: e55379b5bb23d7d1509de82995bb2361ca50f4a812185ab0b930c0848636fccc1837f69a028a9ababc536d10dbb852a417a9da2db56adae38c9ab00aceaf1545
   languageName: node
   linkType: hard
 
-"@react-native-firebase/firestore@npm:^17.4.1":
-  version: 17.5.0
-  resolution: "@react-native-firebase/firestore@npm:17.5.0"
+"@react-native-firebase/firestore@npm:^18.3.2":
+  version: 18.3.2
+  resolution: "@react-native-firebase/firestore@npm:18.3.2"
   peerDependencies:
-    "@react-native-firebase/app": 17.5.0
-  checksum: 43541e50df8369cfad377bce32cd3e1736cd178b6c36a445d669a2af09cf71c4b3d0a72d557db92253bbe54c462a19e465152ca07721c6497214cf4420e21072
-  languageName: node
-  linkType: hard
-
-"@react-native-firebase/functions@npm:^17.0.0":
-  version: 17.5.0
-  resolution: "@react-native-firebase/functions@npm:17.5.0"
-  peerDependencies:
-    "@react-native-firebase/app": 17.5.0
-  checksum: 09b6e7a92cf4773b0ad9691919bf1e52e6b0632bc54f833f4fb5cbe1e476383cf816949e2b6ec2f0ac6524b9e6837eeab9f419fe090141309bbad6aa4f2d4375
+    "@react-native-firebase/app": 18.3.2
+  checksum: d1cb60c738e4ff1607e299a66ed05605c15eb9ea224b93801f9f8a50089b4530907df66a24c5ee2b8ce54018589638d4858db3ead8d1048a18688ea1a2d4640b
   languageName: node
   linkType: hard
 
@@ -3768,11 +3779,10 @@ __metadata:
     "@algolia/client-search": ^4.18.0
     "@babel/cli": ^7.21.0
     "@babel/core": ^7.21.4
-    "@babel/preset-flow": ^7.21.4
-    "@react-native-firebase/app": ^17.4.2
-    "@react-native-firebase/auth": ^17.4.0
-    "@react-native-firebase/firestore": ^17.4.1
-    "@react-native-firebase/functions": ^17.0.0
+    "@babel/preset-flow": ^7.22.15
+    "@react-native-firebase/app": ^18.3.2
+    "@react-native-firebase/auth": ^18.3.2
+    "@react-native-firebase/firestore": ^18.3.2
     "@react-navigation/drawer": ^6.6.2
     "@react-navigation/native": ^6.1.6
     "@react-navigation/native-stack": ^6.9.12
@@ -10651,7 +10661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plist@npm:^3.0.5":
+"plist@npm:^3.0.5, plist@npm:^3.1.0":
   version: 3.1.0
   resolution: "plist@npm:3.1.0"
   dependencies:

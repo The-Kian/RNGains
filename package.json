@@ -1,10 +1,9 @@
 {
   "dependencies": {
     "@algolia/client-search": "^4.18.0",
-    "@react-native-firebase/app": "^17.4.2",
-    "@react-native-firebase/auth": "^17.4.0",
-    "@react-native-firebase/firestore": "^17.4.1",
-    "@react-native-firebase/functions": "^17.0.0",
+    "@react-native-firebase/app": "^18.3.2",
+    "@react-native-firebase/auth": "^18.3.2",
+    "@react-native-firebase/firestore": "^18.3.2",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -29,7 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.4",
-    "@babel/preset-flow": "^7.21.4",
+    "@babel/preset-flow": "^7.22.15",
     "@tsconfig/react-native": "^2.0.3",
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.31",
