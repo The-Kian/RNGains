@@ -1,6 +1,11 @@
 
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 
+export interface IKudos {
+	friendID: string,
+	timestamp: FirebaseFirestoreTypes.Timestamp
+}
+
 export interface Lift {
 	id: string,
 	userWeight: number;
@@ -8,6 +13,7 @@ export interface Lift {
 	deadliftWeight: number;
 	benchWeight: number;
 	timestamp: FirebaseFirestoreTypes.Timestamp
+	kudos: IKudos[]
   }
 
 export type liftStatsType = {

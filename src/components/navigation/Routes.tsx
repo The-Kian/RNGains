@@ -10,7 +10,6 @@ import { UserStatsProvider } from '../../context/userStats/UserStatsProvider'
 
 export default function Routes() {
 	const { user, setUser} = useContext(AuthContext)
-	// const [loading, setLoading] = useState(true)
 	const [initializing, setInitializing] = useState(true)
 
 	function onAuthStateChanged(user: null | FirebaseAuthTypes.User) {
