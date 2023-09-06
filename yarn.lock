@@ -3337,7 +3337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/drawer@npm:^6.6.2":
+"@react-navigation/drawer@npm:^6.6.3":
   version: 6.6.3
   resolution: "@react-navigation/drawer@npm:6.6.3"
   dependencies:
@@ -3368,7 +3368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^6.9.12":
+"@react-navigation/native-stack@npm:^6.9.13":
   version: 6.9.13
   resolution: "@react-navigation/native-stack@npm:6.9.13"
   dependencies:
@@ -3384,7 +3384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^6.1.6":
+"@react-navigation/native@npm:^6.1.7":
   version: 6.1.7
   resolution: "@react-navigation/native@npm:6.1.7"
   dependencies:
@@ -3996,9 +3996,9 @@ __metadata:
     "@react-native-firebase/app": ^18.3.2
     "@react-native-firebase/auth": ^18.3.2
     "@react-native-firebase/firestore": ^18.3.2
-    "@react-navigation/drawer": ^6.6.2
-    "@react-navigation/native": ^6.1.6
-    "@react-navigation/native-stack": ^6.9.12
+    "@react-navigation/drawer": ^6.6.3
+    "@react-navigation/native": ^6.1.7
+    "@react-navigation/native-stack": ^6.9.13
     "@tsconfig/react-native": ^2.0.3
     "@types/jest": ^29.5.0
     "@types/react": ^18.0.31
