@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { View, TextInput } from "react-native";
-import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks";
+import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-core";
 import { algoliaStyles } from "../../../constants/styles/algoliaStyles";
 
 export function SearchBox({
