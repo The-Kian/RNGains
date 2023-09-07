@@ -7,7 +7,7 @@ import LoadingOverlay from "../../screens/LoadingOverlay";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
 import { UserStatsProvider } from "../../context/userStats/UserStatsProvider";
-import NotificationHandler from "../messaging/NotificationHander";
+import NotificationHandler from "../messaging/NotificationHandler";
 
 export default function Routes() {
 	const { user, setUser } = useContext(AuthContext);

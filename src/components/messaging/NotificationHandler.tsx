@@ -5,7 +5,7 @@ import { Alert } from "react-native";
 
 const NotificationHandler = () => {
 	useEffect(() => {
-		const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+		const unsubscribe = messaging().onMessage((remoteMessage) => {
 			// Handle the foreground notification
 			console.log("Notification received:", remoteMessage);
 			Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
