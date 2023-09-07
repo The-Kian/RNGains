@@ -3,7 +3,7 @@ import { ScreenStyle } from "../../constants/styles/screenStyles";
 import {
 	InstantSearch,
 	Configure,
-} from "react-instantsearch-hooks";
+} from "react-instantsearch-core";
 import { SearchBox } from "../../components/ui/FriendRequests/SearchBox";
 import { InfiniteHits } from "../../components/ui/FriendRequests/InfiniteHits";
 import { DisplayNameHitElement } from "../../components/ui/FriendRequests/DisplayNameHitElement";
