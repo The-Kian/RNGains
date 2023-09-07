@@ -79,5 +79,6 @@ dist/
 
 #yarn
 .yarn/cache
+./yarn/install-state.gz
 
 # @end expo-cli
