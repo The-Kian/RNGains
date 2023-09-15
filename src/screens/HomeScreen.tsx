@@ -14,7 +14,7 @@ function HomeScreen() {
 		<View style={ScreenStyle.rootContainer}>
 			<Text style={ScreenStyle.title}>Welcome!</Text>
 			<Text style={ScreenStyle.welcomeText} >Logged in {user.displayName} </Text>
-
+			
 		</View>
 	);
 }
