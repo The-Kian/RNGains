@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth/AuthProvider";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import auth, { FirebaseAuthTypes, firebase } from "@react-native-firebase/auth";
 
 import HomeStack from "./HomeStack";
 import LoadingOverlay from "../../screens/LoadingOverlay";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
 import { UserStatsProvider } from "../../context/userStats/UserStatsProvider";
-import NotificationHandler from "../messaging/NotificationHandler";
+
+import NotificationReceiver from "../messaging/NotificationReceiver";
+
 
 export default function Routes() {
 	const { user, setUser } = useContext(AuthContext);
@@ -15,8 +17,10 @@ export default function Routes() {
 
 	function onAuthStateChanged(user: null | FirebaseAuthTypes.User) {
 		setUser(user as FirebaseAuthTypes.User);
+		firebase.messaging().deleteToken();
 		if (initializing) setInitializing(false);
 	}
+
 
 	useEffect(() => {
 		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -27,7 +31,7 @@ export default function Routes() {
 
 	return (
 		<>
-			<NotificationHandler />
+			<NotificationReceiver />
 			<NavigationContainer>
 				{user ? (
 					<UserStatsProvider>
