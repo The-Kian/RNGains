@@ -1,21 +1,20 @@
 import firestore from "@react-native-firebase/firestore";
-import messaging from "@react-native-firebase/messaging";
 
 
-async function RemoveTokenFromDatabase(userID: string) {
+async function removeTokenFromDatabase(token: string, userID: string) {
 	console.log("🚀 ~ file: RemoveTokenFromDatabase.ts:6 ~ RemoveTokenFromDatabase ~ RemoveTokenFromDatabase:")
-	const token = await messaging().getToken();
+	
 	await firestore()
 		.collection("users")
 		.doc(userID)
 		.update({
 			tokens: firestore.FieldValue.arrayRemove(token),
 		}).then(() => {
-			console.log("🚀 ~ file: RemoveTokenFromDatabase.ts:15 ~ RemoveTokenFromDatabase ~ token removed from database");
+			console.log("🚀 ~ file: RemoveTokenFromDatabase.ts:15 ~ RemoveTokenFromDatabase ~ token saved to database");
 		})
 		.catch((error) => {
 			console.log("🚀 ~ file: RemoveTokenFromDatabase.ts:15 ~ RemoveTokenFromDatabase ~ error:", error.code);
 		});
 }
  
-export default RemoveTokenFromDatabase;
+export default removeTokenFromDatabase;

@@ -4,17 +4,27 @@ import auth, { firebase } from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { ProviderProps } from '../../constants/genericTypes'
 import { AuthContextType, defaultAuthContext } from './AuthTypes'
-import RemoveTokenFromDatabase from '../../components/messaging/RemoveTokenFromDatabase'
+import removeTokenFromDatabase from '../../components/messaging/RemoveTokenFromDatabase'
 
 export const AuthContext = createContext(defaultAuthContext)
 
 export function AuthProvider({ children }: ProviderProps): JSX.Element {
 	const [user, setUser] = useState<any | null>(null)
+	const [token, setToken] = useState<string>('')
 
 	useEffect(() => {
 		auth().onAuthStateChanged((userState) => {
 			setUser(userState)
 		})
+	}, [])
+
+	useEffect(() => {
+		const unsubscribe = firebase
+			.messaging()
+			.onTokenRefresh((token: string) => {
+				setToken(token)
+			})
+		return unsubscribe
 	}, [])
 	
 
@@ -96,7 +106,7 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 
 	const logout = async () => {
 		try {
-			RemoveTokenFromDatabase(user.uid)
+			removeTokenFromDatabase(token, user.uid)
 			firebase.messaging().deleteToken()
 			await auth().signOut()
 		} catch (error) {
