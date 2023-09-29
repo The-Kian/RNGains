@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {
 	createDrawerNavigator,
 	DrawerContentScrollView,
@@ -16,6 +16,9 @@ import UpdateStatsScreen from "../../screens/liftStats/UpdateLiftsScreen";
 import LiftHistoryScreen from "../../screens/liftStats/LiftHistoryScreen";
 import LiftGraphScreen from "../../screens/liftStats/LiftGraphScreen";
 
+import { getDeviceToken } from '../messaging/GetToke';
+
+
 const Drawer = createDrawerNavigator()
 
 
@@ -31,6 +34,10 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
 }
 
 export default function HomeStack() {
+	const { user } = useContext(AuthContext);
+	useEffect(() => {
+		getDeviceToken(user.uid);
+	}, []);
 
 	return (
 		<Drawer.Navigator

@@ -1,9 +1,10 @@
 import { useState, createContext, useEffect } from 'react'
 import { Alert } from 'react-native'
-import auth from '@react-native-firebase/auth'
+import auth, { firebase } from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { ProviderProps } from '../../constants/genericTypes'
 import { AuthContextType, defaultAuthContext } from './AuthTypes'
+import RemoveTokenFromDatabase from '../../components/messaging/RemoveTokenFromDatabase'
 
 export const AuthContext = createContext(defaultAuthContext)
 
@@ -15,6 +16,7 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 			setUser(userState)
 		})
 	}, [])
+	
 
 	const login = async ({
 		email,
@@ -94,6 +96,8 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 
 	const logout = async () => {
 		try {
+			RemoveTokenFromDatabase(user.uid)
+			firebase.messaging().deleteToken()
 			await auth().signOut()
 		} catch (error) {
 			Alert.alert(error)
@@ -111,3 +115,4 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
+
