@@ -13,16 +13,23 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
   console.log("🚀 ~ file: AuthProvider.tsx:13 ~ AuthProvider ~ AuthProvider:", AuthProvider)
   const [user, setUser] = useState<any | null>(null);
   const [token, setToken] = useState<string>("");
+  const [initializing, setInitializing] = useState<boolean>(true);
   
-
   useEffect(() => {
-    auth().onAuthStateChanged((userState) => {
+    const subscriber = auth().onAuthStateChanged((userState) => {
       setUser(userState);
       if (userState) {
         getDeviceToken(userState.uid, setToken);
       }
+      if (initializing) {
+        setInitializing(false);
+      }
     });
+
+    // Unsubscribe on unmount
+    return () => subscriber();
   }, []);
+
 
   const login = async ({ email, password }: { email: string; password: string }) => {
     try {
@@ -32,7 +39,7 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
         Alert.alert("User not found");
       }
     }
-    console.log("🚀 ~ file: AuthProvider.tsx:46 ~ AuthProvider ~ login:", login);
+    console.log("🚀 ~ file: AuthProvider.tsx:46 ~ AuthProvider ~ login:");
   };
 
   const register = async ({ email, password }: { email: string; password: string }): Promise<void> => {
@@ -91,13 +98,14 @@ export function AuthProvider({ children }: ProviderProps): JSX.Element {
       await removeTokenFromDatabase(token, user.uid);
       await firebase.messaging().deleteToken();
       await auth().signOut();
-      console.log("🚀 ~ file: AuthProvider.tsx:116 ~ logout ~ logout:", logout);
+      console.log("🚀 ~ file: AuthProvider.tsx:116 ~ logout ~ logout:");
     } catch (error) {
       Alert.alert(error);
     }
   };
 
   const value: AuthContextType = {
+    initializing,
     user,
     setUser,
     login,

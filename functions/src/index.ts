@@ -19,14 +19,15 @@ export const sendFriendRequestNotification = functions.firestore
 
     const newStatus = change.after.data()?.status;
 
-    const tokens = friendDoc.data()?.tokens;
+    const token = friendDoc.data()?.token;
     const payload = {
       data: {
-        type: `friend request ${newStatus}`,
+        type: "friendRequest",
         userID,
         friendID,
+        newStatus,
       },
-      token: tokens[tokens.length - 1],
+      token,
     };
 
     try {
