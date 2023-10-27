@@ -1,7 +1,6 @@
 import firestore, {
 	FirebaseFirestoreTypes,
 } from "@react-native-firebase/firestore";
-import { Alert } from "react-native";
 
 interface friendRequestProps {
 	userID: string;
@@ -56,12 +55,6 @@ export const sendFriendRequest = async ({
 
 	return batch
 		.commit()
-		.then(() => {
-			Alert.alert("Friend request sent");
-		})
-		.catch((error) => {
-			Alert.alert(error.message);
-		});
 };
 
 export const respondToFriendRequest = async ({

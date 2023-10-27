@@ -19,14 +19,14 @@ export const sendFriendRequestNotification = functions.firestore
 
     const newStatus = change.after.data()?.status;
 
-    const tokens = friendDoc.data()?.tokens;
+    const token = friendDoc.data()?.token;
     const payload = {
       data: {
         type: `friend request ${newStatus}`,
         userID,
         friendID,
       },
-      token: tokens[tokens.length - 1],
+      token,
     };
 
     try {
@@ -36,4 +36,3 @@ export const sendFriendRequestNotification = functions.firestore
       console.log("🚀 ~ file: index.ts:30 ~ .onCreate Error sending notification:", error);
     }
   });
-

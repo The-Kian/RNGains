@@ -51,5 +51,6 @@
     "clean": "rm -rf node_modules && rm -rf build && yarn cache clean && yarn install",
     "start": "expo start --dev-client",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src"
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
