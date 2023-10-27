@@ -10,6 +10,8 @@ export function getDeviceToken(
 		getDeviceToken,
 	);
 
+
+
 	try {
 		messaging()
 			.getToken()

@@ -8,7 +8,7 @@ admin.initializeApp();
 
 export const sendFriendRequestNotification = functions.firestore
   .document("users/{userID}/friends/{friendID}")
-  .onCreate(async (snap, context) => {
+  .onWrite(async (change, context) => {
     const userID = context.params.userID;
     const friendID = context.params.friendID;
 
@@ -17,13 +17,16 @@ export const sendFriendRequestNotification = functions.firestore
 
     const getMessaging = admin.messaging();
 
+    const newStatus = change.after.data()?.status;
+
+    const tokens = friendDoc.data()?.tokens;
     const payload = {
       data: {
-        type: "friendRequest",
+        type: `friend request ${newStatus}`,
         userID,
         friendID,
       },
-      token: friendDoc.data()?.tokens[0] as string,
+      token: tokens[tokens.length - 1],
     };
 
     try {
@@ -33,3 +36,4 @@ export const sendFriendRequestNotification = functions.firestore
       console.log("🚀 ~ file: index.ts:30 ~ .onCreate Error sending notification:", error);
     }
   });
+

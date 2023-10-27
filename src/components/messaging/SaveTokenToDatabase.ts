@@ -6,12 +6,8 @@ async function saveTokenToDatabase(token: string, userID: string) {
 			`🚀 ~ file: SaveTokenToDatabase.ts:6 ~ saveTokenToDatabase ~ userID: ${userID}`,
 		);
 
-		await firestore()
-			.collection("users")
-			.doc(userID)
-			.update({
-				tokens: firestore.FieldValue.arrayUnion(token),
-			});
+		const userRef = firestore().collection("users").doc(userID);
+		await userRef.update({ token });
 
 		console.log(
 			"🚀 ~ file: SaveTokenToDatabase.ts:15 ~ saveTokenToDatabase ~ token saved to database",
@@ -21,25 +17,6 @@ async function saveTokenToDatabase(token: string, userID: string) {
 			"🚀 ~ file: SaveTokenToDatabase.ts:15 ~ saveTokenToDatabase ~ error:",
 			error.code,
 		);
-		if (error.code === "firestore/not-found") {
-			try {
-				await firestore()
-					.collection("users")
-					.doc(userID)
-					.set({
-						tokens: [token],
-					});
-
-				console.log(
-					"🚀 ~ file: SaveTokenToDatabase.ts:26 ~ saveTokenToDatabase ~ token saved to database",
-				);
-			} catch (innerError) {
-				console.log(
-					"🚀 ~ file: SaveTokenToDatabase.ts:28 ~ saveTokenToDatabase ~ error:",
-					innerError,
-				);
-			}
-		}
 	}
 }
 
