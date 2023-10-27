@@ -11,35 +11,34 @@ import { UserStatsProvider } from "../../context/userStats/UserStatsProvider";
 import NotificationReceiver from "../messaging/NotificationReceiver";
 
 export default function Routes() {
-	const { user, setUser } = useContext(AuthContext);
-	const [initializing, setInitializing] = useState(true);
+  const { user, setUser } = useContext(AuthContext);
+  const [initializing, setInitializing] = useState(true);
 
-	function onAuthStateChanged(user: null | FirebaseAuthTypes.User) {
-		setUser(user as FirebaseAuthTypes.User);
-		firebase.messaging().deleteToken();
-		if (initializing) setInitializing(false);
-	}
+  function onAuthStateChanged(user: null | FirebaseAuthTypes.User) {
+    setUser(user as FirebaseAuthTypes.User);
+    firebase.messaging().deleteToken();
+    if (initializing) setInitializing(false);
+  }
 
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
-	useEffect(() => {
-		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-		return subscriber; // unsubscribe on unmount
-	}, []);
+  if (initializing) return <LoadingOverlay message="Loading"></LoadingOverlay>;
 
-	if (initializing) return <LoadingOverlay message="Loading"></LoadingOverlay>;
-
-	return (
-		<>
-			<NotificationReceiver />
-			<NavigationContainer>
-				{user ? (
-					<UserStatsProvider>
-						<HomeStack />
-					</UserStatsProvider>
-				) : (
-					<AuthStack />
-				)}
-			</NavigationContainer>
-		</>
-	);
+  return (
+    <>
+      <NotificationReceiver />
+      <NavigationContainer>
+        {user ? (
+          <UserStatsProvider>
+            <HomeStack />
+          </UserStatsProvider>
+        ) : (
+          <AuthStack />
+        )}
+      </NavigationContainer>
+    </>
+  );
 }

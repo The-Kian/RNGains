@@ -2706,6 +2706,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@notifee/react-native@npm:^7.8.0":
+  version: 7.8.0
+  resolution: "@notifee/react-native@npm:7.8.0"
+  peerDependencies:
+    react-native: "*"
+  checksum: 800233c9505195046e918ee42a4b11d8e84cf1846ea4a0b52599e1a40181b2bbfcab09c64b445b5a7eed98c38556c97550bce32ed24a51ce05ccd8b65047548d
+  languageName: node
+  linkType: hard
+
 "@npmcli/fs@npm:^1.0.0":
   version: 1.1.1
   resolution: "@npmcli/fs@npm:1.1.1"
@@ -11323,52 +11332,6 @@ __metadata:
   checksum: 3ea587b981a19016297edb96d1ffe48af7e6af69660e3b371dbfc73722a73a0b0e9be5c88089fbeeb866c389c1098e07f64929c7414290504b855f54f901ab10
   languageName: node
   linkType: hard
-
-"rn_gains@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "rn_gains@workspace:."
-  dependencies:
-    "@algolia/client-search": ^4.19.1
-    "@babel/cli": ^7.22.15
-    "@babel/core": ^7.20.0
-    "@babel/preset-flow": ^7.22.15
-    "@react-native-firebase/app": ^18.3.2
-    "@react-native-firebase/auth": ^18.3.2
-    "@react-native-firebase/firestore": ^18.3.2
-    "@react-native-firebase/messaging": ^18.3.2
-    "@react-navigation/drawer": ^6.6.3
-    "@react-navigation/native": ^6.1.7
-    "@react-navigation/native-stack": ^6.9.13
-    "@tsconfig/react-native": ^3.0.2
-    "@types/jest": ^29.5.4
-    "@types/react": ~18.2.14
-    "@types/react-native": ^0.72.2
-    "@types/react-test-renderer": ^18.0.1
-    "@typescript-eslint/eslint-plugin": ^6.6.0
-    "@typescript-eslint/parser": ^6.6.0
-    algoliasearch: ^4.19.1
-    eslint: ^8.48.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-react: ^7.33.2
-    expo: ~49.0.9
-    expo-build-properties: ~0.8.3
-    expo-dev-client: ~2.4.11
-    expo-splash-screen: ~0.20.5
-    expo-status-bar: ~1.6.0
-    firestore-export-import: ^1.4.0
-    prettier: ^3.0.3
-    react: 18.2.0
-    react-instantsearch-core: ^7.0.2
-    react-native: 0.72.5
-    react-native-chart-kit: ^6.12.0
-    react-native-gesture-handler: ~2.12.0
-    react-native-reanimated: ~3.3.0
-    react-native-safe-area-context: 4.6.3
-    react-native-screens: ~3.22.0
-    react-native-svg: 13.9.0
-    typescript: ^5.1.3
-  languageName: unknown
-  linkType: soft
 
 "run-parallel@npm:^1.1.9":
   version: 1.2.0
