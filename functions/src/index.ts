@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-// Deploy with `firebase deploy --only functions`
-
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
@@ -9,32 +6,47 @@ admin.initializeApp();
 export const sendFriendRequestNotification = functions.firestore
   .document("users/{userID}/friends/{friendID}")
   .onWrite(async (change, context) => {
-    const userID = context.params.userID;
-    const friendID = context.params.friendID;
+    const {userID, friendID} = context.params;
 
     const friendRef = admin.firestore().collection("users").doc(friendID);
     const friendDoc = await friendRef.get();
 
-    const getMessaging = admin.messaging();
-
-    const newStatus = change.after.data()?.status;
+    if (!friendDoc.exists || !friendDoc.data()?.token) {
+      console.log(`No token found for user: ${friendID}`);
+      return;
+    }
 
     const token = friendDoc.data()?.token;
+    console.log(`Token for user ${friendID}: ${token}`);
+
+    const newStatus = change.after.data()?.status;
+    const displayName = friendDoc.data()?.displayName;
+
+    if (!displayName) {
+      console.log(`No username found for user: ${friendID}`);
+      return;
+    }
+
+    if (newStatus === undefined) {
+      console.log(`Status is undefined for user: ${friendID}`);
+      return;
+    }
+
     const payload = {
       data: {
         type: "friendRequest",
         userID,
         friendID,
         newStatus,
+        displayName,
       },
       token,
     };
 
     try {
-      const response = await getMessaging.send(payload);
-      console.log("🚀 ~ file: index.ts:30 ~ .onCreate Notification response:", response);
+      const response = await admin.messaging().send(payload);
+      console.log("Notification response:", response);
     } catch (error) {
-      console.log("🚀 ~ file: index.ts:30 ~ .onCreate Error sending notification:", error);
+      console.error("Error sending notification:", error);
     }
   });
-

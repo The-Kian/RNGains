@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
 import { UserStatsProvider } from "../../context/userStats/UserStatsProvider";
 
-import { NotificationReceiver } from "../messaging/NotificationReceiver";
+import { ForegoundNotificationReceiver } from "../messaging/FriendRequstNotificationHandler";
 
 export default function Routes() {
   const { user, initializing } = useContext(AuthContext);
@@ -16,7 +16,7 @@ export default function Routes() {
 
   return (
     <>
-      <NotificationReceiver />
+      <ForegoundNotificationReceiver />
       <NavigationContainer>
         {user ? (
           <UserStatsProvider>
