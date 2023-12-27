@@ -9,7 +9,6 @@ import {
 
 import HomeScreen from "../../screens/HomeScreen";
 import { Colors } from "../../constants/colors";
-import FriendsScreen from "../../screens/friends/FriendsScreen";
 import { AuthContext } from "../../context/auth/AuthProvider";
 import ProfileScreen from "../../screens/authScreens/ProfileScreen";
 import UpdateStatsScreen from "../../screens/liftStats/UpdateLiftsScreen";
@@ -37,9 +36,8 @@ export default function HomeStack() {
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="HomeScreen" component={HomeScreen} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
-      <Drawer.Screen name="Friends" component={FriendsScreen} />
       <Drawer.Screen name="UpdateStats" component={UpdateStatsScreen} />
       <Drawer.Screen name="Stats History" component={LiftHistoryScreen} />
       <Drawer.Screen name="Stats Graph" component={LiftGraphScreen} />

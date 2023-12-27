@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth/AuthProvider";
 
-import HomeStack from "./HomeStack";
 import LoadingOverlay from "../../screens/LoadingOverlay";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./AuthStack";
 import { UserStatsProvider } from "../../context/userStats/UserStatsProvider";
 
-import { ForegoundNotificationReceiver } from "../messaging/FriendRequstNotificationHandler";
+import { ForegoundNotificationReceiver } from "../messaging/FriendRequestNotificationHandler";
+import AppTabs from "./AppTabs";
 
 export default function Routes() {
   const { user, initializing } = useContext(AuthContext);
@@ -20,7 +20,7 @@ export default function Routes() {
       <NavigationContainer>
         {user ? (
           <UserStatsProvider>
-            <HomeStack />
+            <AppTabs />
           </UserStatsProvider>
         ) : (
           <AuthStack />

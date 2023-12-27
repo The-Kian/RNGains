@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance } from "@notifee/react-native";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 interface RemoteMessageData {
   displayName: string;
@@ -9,7 +10,8 @@ interface RemoteMessageData {
   type: string;
 }
 
-const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
+const friendRequestNotificationHandler = async (displayName: string, newStatus: string, navigation?: any) => {
+
   const channelId = await notifee.createChannel({
     id: "default",
     name: "Default Channel",
@@ -63,7 +65,7 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
         {
           text: "View",
           onPress: () => {
-            /* navigate to relevant screen */
+            navigation.navigate('FriendRequests');
           },
         },
       ]
@@ -89,8 +91,7 @@ export const ForegoundNotificationReceiver = () => {
 };
 
 export const BackgroundNotificationHandler = async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-  console.log('Received a background message', remoteMessage);
-  
+  console.log("Received a background message", remoteMessage);
   // Extract data and determine if it's a friend request
   const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
   if (type === "friendRequest") {

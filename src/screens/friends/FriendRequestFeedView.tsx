@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { FriendsContext } from "../../context/friends/FriendsProvider";
 import { AuthContext } from "../../context/auth/AuthProvider";
 
-export const FriendRequestFeed = () => {
+export const FriendRequestFeedView = () => {
   const { user } = useContext(AuthContext);
 
   const { friendRequests, currentFriends, deniedFriends } = useContext(FriendsContext);
