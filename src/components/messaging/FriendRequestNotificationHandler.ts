@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -66,7 +66,7 @@ export const ForegoundNotificationReceiver = () => {
       console.log("🚀 Foreground Event Type:", type, "Detail:", detail);
       console.log("EventType.PRESS value:", EventType.PRESS); // Should log the value representing press events
 
-      if (type === EventType.PRESS && detail?.pressAction?.id === 'view') {
+      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === 'view') {
         console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests")
         
         navigation.navigate('FriendsScreen');
