@@ -1,5 +1,8 @@
-import Providers from './src/context/navigation/NavigationProviders'
+import Providers from "./src/context/navigation/NavigationProviders";
+import { PermissionsAndroid } from "react-native";
 
 export default function App() {
-	return <Providers />
+  console.log("app launched");
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+  return <Providers />;
 }
