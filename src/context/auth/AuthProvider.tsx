@@ -10,7 +10,6 @@ import { getDeviceToken } from "../../components/messaging/GetDeviceToken";
 export const AuthContext = createContext(defaultAuthContext);
 
 export function AuthProvider({ children }: ProviderProps): JSX.Element {
-  console.log("🚀 ~ file: AuthProvider.tsx:13 ~ AuthProvider ~ AuthProvider:", AuthProvider)
   const [user, setUser] = useState<any | null>(null);
   const [token, setToken] = useState<string>("");
   const [initializing, setInitializing] = useState<boolean>(true);
