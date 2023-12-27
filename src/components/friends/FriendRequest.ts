@@ -58,7 +58,7 @@ export const respondToFriendRequest = async ({ userID, friendID, response }: fri
     return batch
       .commit()
       .then(() => {
-        Alert.alert("Friend removed");
+        // Alert.alert("Friend removed");
       })
       .catch((error) => {
         Alert.alert(error.message);

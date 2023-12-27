@@ -1,14 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import { View, Button, Text } from "react-native";
-
-import onDisplayNotifciation from "../../utils/displayNotification";
 
 export const NotificationTestScreen = () => {
 
-
+  const navigation = useNavigation();
   return (
     <View>
       <Text>Hi</Text>
-      <Button title="Display Notification" onPress={onDisplayNotifciation} />
+      <Button title="Navigate to friends feed view" onPress={() => navigation.navigate("FriendsScreen")} />
     </View>
   );
 };

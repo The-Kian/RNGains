@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
-import notifee, { AndroidImportance } from "@notifee/react-native";
-import { Alert } from "react-native";
+import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
 
 interface RemoteMessageData {
@@ -10,7 +9,7 @@ interface RemoteMessageData {
   type: string;
 }
 
-const friendRequestNotificationHandler = async (displayName: string, newStatus: string, navigation?: any) => {
+const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
 
   const channelId = await notifee.createChannel({
     id: "default",
@@ -46,36 +45,15 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
     body: notificationBody,
     android: {
       channelId,
-      actions:
-        newStatus === "received"
-          ? [
-            {
-              title: "View",
-              pressAction: { id: "view" },
-            },
-          ]
-          : [],
+      actions: newStatus === "requested" ? [{ title: "View", pressAction: { id: "view" } }] : [],
     },
   });
-
-  Alert.alert(notificationTitle, notificationBody, [
-    { text: "OK", onPress: () => console.log("OK Pressed") },
-    ...(newStatus === "received"
-      ? [
-        {
-          text: "View",
-          onPress: () => {
-            navigation.navigate('FriendRequests');
-          },
-        },
-      ]
-      : []),
-  ]);
 };
 
 export const ForegoundNotificationReceiver = () => {
+  const navigation = useNavigation();
   useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+    const onMessageUnsubscribe = messaging().onMessage(async (remoteMessage) => {
       if (remoteMessage.data) {
         const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
         if (type === "friendRequest") {
@@ -84,18 +62,32 @@ export const ForegoundNotificationReceiver = () => {
       }
     });
 
-    return unsubscribe;
-  }, []);
+    const onNotificationInteractionUnsubscribe = notifee.onForegroundEvent(({ type, detail }) => {
+      console.log("🚀 Foreground Event Type:", type, "Detail:", detail);
+      console.log("EventType.PRESS value:", EventType.PRESS); // Should log the value representing press events
+
+      if (type === EventType.PRESS && detail?.pressAction?.id === 'view') {
+        console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests")
+        
+        navigation.navigate('FriendsScreen');
+
+      }
+    });
+    return () => {    
+      onMessageUnsubscribe();
+      onNotificationInteractionUnsubscribe();
+    }
+  }, [navigation]);
 
   return null;
 };
 
-export const BackgroundNotificationHandler = async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-  console.log("Received a background message", remoteMessage);
-  // Extract data and determine if it's a friend request
-  const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
-  if (type === "friendRequest") {
-    // Call the existing handler to process the notification
-    await friendRequestNotificationHandler(displayName, newStatus);
-  }
-};
+// export const BackgroundNotificationHandler = async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+//   console.log("Received a background message", remoteMessage);
+//   // Extract data and determine if it's a friend request
+//   const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
+//   if (type === "friendRequest") {
+//     // Call the existing handler to process the notification
+//     await friendRequestNotificationHandler(displayName, newStatus);
+//   }
+// };

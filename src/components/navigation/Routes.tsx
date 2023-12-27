@@ -11,13 +11,14 @@ import AppTabs from "./AppTabs";
 
 export default function Routes() {
   const { user, initializing } = useContext(AuthContext);
+  
 
   if (initializing) return <LoadingOverlay message="Loading"></LoadingOverlay>;
 
   return (
     <>
-      <ForegoundNotificationReceiver />
       <NavigationContainer>
+        <ForegoundNotificationReceiver />
         {user ? (
           <UserStatsProvider>
             <AppTabs />
