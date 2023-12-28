@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import messaging from "@react-native-firebase/messaging";
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface RemoteMessageData {
   displayName: string;
@@ -10,7 +11,6 @@ interface RemoteMessageData {
 }
 
 const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
-
   const channelId = await notifee.createChannel({
     id: "default",
     name: "Default Channel",
@@ -21,23 +21,23 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
   let notificationBody;
 
   switch (newStatus) {
-  case "requested":
-    notificationTitle = "New Friend Request";
-    notificationBody = `You have received a new friend request from ${displayName}.`;
-    break;
-  case "accepted":
-    notificationTitle = "Friend Request Accepted";
-    notificationBody = `${displayName} has accepted your friend request.`;
-    break;
-  case "denied":
-    notificationTitle = "Friend Request Denied";
-    notificationBody = `${displayName} has denied your friend request.`;
-    break;
-  default:
-    // Log for debugging
-    console.log(`Unhandled status: ${newStatus}`);
-    notificationTitle = "Friend Request Notification";
-    notificationBody = `There's a new update regarding your friend request with ${displayName}.`;
+    case "requested":
+      notificationTitle = "New Friend Request";
+      notificationBody = `You have received a new friend request from ${displayName}.`;
+      break;
+    case "accepted":
+      notificationTitle = "Friend Request Accepted";
+      notificationBody = `${displayName} has accepted your friend request.`;
+      break;
+    case "denied":
+      notificationTitle = "Friend Request Denied";
+      notificationBody = `${displayName} has denied your friend request.`;
+      break;
+    default:
+      // Log for debugging
+      console.log(`Unhandled status: ${newStatus}`);
+      notificationTitle = "Friend Request Notification";
+      notificationBody = `There's a new update regarding your friend request with ${displayName}.`;
   }
 
   await notifee.displayNotification({
@@ -45,7 +45,8 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
     body: notificationBody,
     android: {
       channelId,
-      actions: newStatus === "requested" ? [{ title: "View", pressAction: { id: "view" } }] : [],
+      actions:
+        newStatus === "requested" ? [{ title: "View", pressAction: { id: "view", launchActivity: "default" } }] : [],
     },
   });
 };
@@ -64,30 +65,28 @@ export const ForegoundNotificationReceiver = () => {
 
     const onNotificationInteractionUnsubscribe = notifee.onForegroundEvent(({ type, detail }) => {
       console.log("🚀 Foreground Event Type:", type, "Detail:", detail);
-      console.log("EventType.PRESS value:", EventType.PRESS); // Should log the value representing press events
 
-      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === 'view') {
-        console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests")
-        
-        navigation.navigate('FriendsScreen');
+      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === "view") {
+        console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests");
 
+        navigation.navigate("FriendsTab", { screen: "FriendsScreen", params: { activeView: "friendRequests" } });
       }
     });
-    return () => {    
+    return () => {
       onMessageUnsubscribe();
       onNotificationInteractionUnsubscribe();
-    }
+    };
   }, [navigation]);
 
   return null;
 };
 
-// export const BackgroundNotificationHandler = async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-//   console.log("Received a background message", remoteMessage);
-//   // Extract data and determine if it's a friend request
-//   const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
-//   if (type === "friendRequest") {
-//     // Call the existing handler to process the notification
-//     await friendRequestNotificationHandler(displayName, newStatus);
-//   }
-// };
+export const BackgroundNotificationHandler = async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+  console.log("Received a background message", remoteMessage);
+  // Extract data and determine if it's a friend request
+  const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
+  if (type === "friendRequest") {
+    // Call the existing handler to process the notification
+    await friendRequestNotificationHandler(displayName, newStatus);
+  }
+};

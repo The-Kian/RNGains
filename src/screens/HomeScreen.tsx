@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 
 import { AuthContext } from "../context/auth/AuthProvider";
 import { ScreenStyle } from "../constants/styles/screenStyles";
-import { NotificationTestScreen } from "./notification/Notification";
+import { FeatureTestScreen } from "./notification/TestButton";
 
 function HomeScreen() {
   const { user } = useContext(AuthContext);
@@ -12,7 +12,7 @@ function HomeScreen() {
     <View style={ScreenStyle.rootContainer}>
       <Text style={ScreenStyle.title}>Welcome!</Text>
       <Text style={ScreenStyle.welcomeText}>Logged in {user.displayName} </Text>
-	  <NotificationTestScreen/>
+	  <FeatureTestScreen/>
     </View>
   );
 }
