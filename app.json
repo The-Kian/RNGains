@@ -9,6 +9,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "scheme": "rngains",
     "assetBundlePatterns": [
       "**/*"
     ],
