@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface RemoteMessageData {
   displayName: string;
@@ -46,7 +45,7 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
     android: {
       channelId,
       actions:
-        newStatus === "requested" ? [{ title: "View", pressAction: { id: "view", launchActivity: "default" } }] : [],
+        newStatus === "requested" ? [{ title: "View", pressAction: { id: "navigateToFriendRequests", launchActivity: "default" } }] : [],
     },
   });
 };
@@ -66,7 +65,7 @@ export const ForegoundNotificationReceiver = () => {
     const onNotificationInteractionUnsubscribe = notifee.onForegroundEvent(({ type, detail }) => {
       console.log("🚀 Foreground Event Type:", type, "Detail:", detail);
 
-      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === "view") {
+      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === "navigateToFriendRequests") {
         console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests");
 
         navigation.navigate("FriendsTab", { screen: "FriendsScreen", params: { activeView: "friendRequests" } });
