@@ -8,7 +8,7 @@ export default function AppTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Friends" component={FriendsStack} />
+      <Tab.Screen name="FriendsTab" component={FriendsStack} />
     </Tab.Navigator>
   );
 }

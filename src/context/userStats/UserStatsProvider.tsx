@@ -58,18 +58,24 @@ export function UserStatsProvider({ children }: ProviderProps) {
   }, [user]);
 
   const fetchLatestLift = async (userID: string) => {
-    const docSnapshot = await firestore()
-      .collection("users")
-      .doc(userID)
-      .collection("lifts")
-      .orderBy("timestamp", "desc")
-      .limit(1)
-      .get();
+    try {
+      const docSnapshot = await firestore()
+        .collection("users")
+        .doc(userID)
+        .collection("lifts")
+        .orderBy("timestamp", "desc")
+        .limit(1)
+        .get();
 
-    if (!docSnapshot.empty) {
-      const doc = docSnapshot.docs[0];
-      const latestLiftData: Lift = { id: doc.id, ...doc.data() } as Lift;
-      setLatestLift(latestLiftData);
+      if (!docSnapshot.empty) {
+        const doc = docSnapshot.docs[0];
+        const latestLiftData: Lift = { id: doc.id, ...doc.data() } as Lift;
+        setLatestLift(latestLiftData);
+        setLoading(false);
+      }
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
       setLoading(false);
     }
   };
