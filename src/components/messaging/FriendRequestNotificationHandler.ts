@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Platform } from "react-native";
 
 interface RemoteMessageData {
   displayName: string;
@@ -9,7 +10,7 @@ interface RemoteMessageData {
   type: string;
 }
 
-const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
+export const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
   const channelId = await notifee.createChannel({
     id: "default",
     name: "Default Channel",
@@ -47,7 +48,21 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
       actions:
         newStatus === "requested" ? [{ title: "View", pressAction: { id: "navigateToFriendRequests", launchActivity: "default" } }] : [],
     },
+    ios: {
+      sound: "default",
+      categoryId: "friendRequest",
+    },
   });
+
+  await notifee.setNotificationCategories([
+    {
+      id: 'friendRequest',
+      actions: newStatus === "requested" ? [
+        { id: "navigateToFriendRequests", title: "View", foreground: true }
+      ] : [],
+    },
+  ]);
+
 };
 
 export const ForegoundNotificationReceiver = () => {
@@ -55,6 +70,8 @@ export const ForegoundNotificationReceiver = () => {
   useEffect(() => {
     const onMessageUnsubscribe = messaging().onMessage(async (remoteMessage) => {
       if (remoteMessage.data) {
+        await notifee.requestPermission();
+        console.log(`🚀 ~ onMessageUnsubscribe ~ remoteMessage:`, remoteMessage)
         const { displayName, newStatus, type } = remoteMessage.data as unknown as RemoteMessageData;
         if (type === "friendRequest") {
           await friendRequestNotificationHandler(displayName, newStatus);
@@ -64,8 +81,8 @@ export const ForegoundNotificationReceiver = () => {
 
     const onNotificationInteractionUnsubscribe = notifee.onForegroundEvent(({ type, detail }) => {
       console.log("🚀 Foreground Event Type:", type, "Detail:", detail);
-
-      if (type === EventType.ACTION_PRESS && detail?.pressAction?.id === "navigateToFriendRequests") {
+      
+      if ((type === EventType.PRESS && Platform.OS == 'ios') || ( EventType.ACTION_PRESS && detail?.pressAction?.id === "navigateToFriendRequests")) {
         console.log("🚀 ~ file: FriendRequestNotificationHandler.ts:68: navigating to freindrequests");
 
         navigation.navigate("FriendsTab", { screen: "FriendsScreen", params: { activeView: "friendRequests" } });
