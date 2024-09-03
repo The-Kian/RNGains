@@ -3,13 +3,16 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { NativeModules } from "react-native";
+
+const { NotificationServiceBridge } = NativeModules;
 interface RemoteMessageData {
   displayName: string;
   newStatus: string;
   type: string;
 }
 
-const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
+export const friendRequestNotificationHandler = async (displayName: string, newStatus: string) => {
   const channelId = await notifee.createChannel({
     id: "default",
     name: "Default Channel",
@@ -18,7 +21,7 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
 
   let notificationTitle;
   let notificationBody;
-
+  const timeInterval = 5; 
   switch (newStatus) {
     case "requested":
       notificationTitle = "New Friend Request";
@@ -38,6 +41,8 @@ const friendRequestNotificationHandler = async (displayName: string, newStatus: 
       notificationTitle = "Friend Request Notification";
       notificationBody = `There's a new update regarding your friend request with ${displayName}.`;
   }
+
+  NotificationServiceBridge.scheduleNotification(notificationTitle, notificationBody, timeInterval);
 
   await notifee.displayNotification({
     title: notificationTitle,
